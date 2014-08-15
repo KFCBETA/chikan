@@ -2,9 +2,15 @@
 <resources>
 
     <string name="app_name">Chikan</string>
-    <string name="title_section1">Section 1</string>
-    <string name="title_section2">Section 2</string>
-    <string name="title_section3">Section 3</string>
+    <string name="title_section1">International</string>
+    <string name="title_section2">Economic</string>
+    <string name="title_section3">Science</string>
+    <string name="title_section4">Sport</string>
+    <string name="title_section5">Entertainment</string>
+
+    <string name="title_menu">Category</string>
+
+
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="action_example">Example action</string>
