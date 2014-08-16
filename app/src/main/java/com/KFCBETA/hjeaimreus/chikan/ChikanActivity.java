@@ -5,18 +5,18 @@ import android.app.Activity;
 import android.app.ActionBar;
 import android.app.Fragment;
 import android.app.FragmentManager;
-import android.content.Context;
-import android.os.Build;
+import android.app.FragmentTransaction;
+import android.content.Intent;
 import android.os.Bundle;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.support.v4.widget.DrawerLayout;
-import android.widget.ArrayAdapter;
-import android.widget.TextView;
+
+import test.BlankFragment;
+import test.Test;
 
 
 public class ChikanActivity extends Activity
@@ -52,25 +52,28 @@ public class ChikanActivity extends Activity
         // update the main content by replacing fragments
         FragmentManager fragmentManager = getFragmentManager();
         fragmentManager.beginTransaction()
-                .replace(R.id.container, PlaceholderFragment.newInstance(position + 1))
+                .replace(R.id.container, PlaceholderFragment.newInstance(position+1))
                 .commit();
     }
 
     public void onSectionAttached(int number) {
         switch (number) {
             case 1:
-                mTitle = getString(R.string.title_section1);
+                mTitle = getString(R.string.title_section0);
                 break;
             case 2:
-                mTitle = getString(R.string.title_section2);
+                mTitle = getString(R.string.title_section1);
                 break;
             case 3:
-                mTitle = getString(R.string.title_section3);
+                mTitle = getString(R.string.title_section2);
                 break;
             case 4:
-                mTitle = getString(R.string.title_section4);
+                mTitle = getString(R.string.title_section3);
                 break;
             case 5:
+                mTitle = getString(R.string.title_section4);
+                break;
+            case 6:
                 mTitle = getString(R.string.title_section5);
                 break;
         }
@@ -90,7 +93,7 @@ public class ChikanActivity extends Activity
             // Only show items in the action bar relevant to this screen
             // if the drawer is not showing. Otherwise, let the drawer
             // decide what to show in the action bar.
-            getMenuInflater().inflate(R.menu.chikan, menu);
+            //getMenuInflater().inflate(R.menu.chikan, menu);
             restoreActionBar();
             return true;
         }

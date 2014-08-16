@@ -7,13 +7,12 @@
     <string name="title_section3">Science</string>
     <string name="title_section4">Sport</string>
     <string name="title_section5">Entertainment</string>
-
+    <string name="title_section0">News</string>
     <string name="title_menu">Category</string>
-
-
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="action_example">Example action</string>
     <string name="action_settings">Settings</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>
