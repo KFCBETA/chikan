@@ -6,21 +6,16 @@ import android.app.ActionBar;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
-import android.content.Intent;
-import android.media.Image;
 import android.os.Bundle;
-import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.support.v4.widget.DrawerLayout;
-import android.widget.ImageView;
 
+import fragment.InternationalFragment;
 import fragment.NewsFragment;
-import test.BlankFragment;
-import test.Test;
 
 
 public class ChikanActivity extends Activity
@@ -61,15 +56,18 @@ public class ChikanActivity extends Activity
     }
 
     public void onSectionAttached(int number) {
+
+        FragmentTransaction mf = getFragmentManager().beginTransaction();
         switch (number) {
             case 1:
                 mTitle = getString(R.string.title_section0);
                 Fragment fragment_test_1 = new NewsFragment();
-                FragmentTransaction mf = getFragmentManager().beginTransaction();
                 mf.replace(R.id.container, fragment_test_1).commit();
                 break;
             case 2:
                 mTitle = getString(R.string.title_section1);
+                Fragment fragment_test_2 = new InternationalFragment();
+                mf.replace(R.id.container, fragment_test_2).commit();
                 break;
             case 3:
                 mTitle = getString(R.string.title_section2);

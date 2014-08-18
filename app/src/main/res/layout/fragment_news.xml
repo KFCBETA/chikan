@@ -6,13 +6,15 @@
     tools:context="fragment.NewsFragment">
 
     <ScrollView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:id="@+id/Scroll"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
         android:layout_centerHorizontal="true">
 
         <HorizontalScrollView
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="fill_parent"
+            android:id="@+id/hoScroll">
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -42,8 +44,7 @@
                             android:layout_height="170dp"
                             android:text="News_1"
                             android:textSize="30dp"
-                            android:id="@+id/new_1"
-                            android:background="#FF33"/>
+                            android:id="@+id/new_1"/>
 
                         <TextView
                             android:layout_width="150dp"
@@ -54,7 +55,7 @@
                             android:background="#DD66"
                             android:layout_marginTop="10dp"/>
 
-                        </LinearLayout>
+                    </LinearLayout>
 
                     <LinearLayout
                         android:layout_width="wrap_content"
@@ -90,9 +91,9 @@
                             android:layout_marginLeft="10dp"
                             android:layout_marginTop="10dp"/>
 
-                        </LinearLayout>
                     </LinearLayout>
                 </LinearLayout>
-            </HorizontalScrollView>
-        </ScrollView>
+            </LinearLayout>
+        </HorizontalScrollView>
+    </ScrollView>
     </RelativeLayout>
