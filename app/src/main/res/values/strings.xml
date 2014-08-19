@@ -2,17 +2,25 @@
 <resources>
 
     <string name="app_name">Chikan</string>
-    <string name="title_section1">International</string>
-    <string name="title_section2">Economic</string>
-    <string name="title_section3">Science</string>
-    <string name="title_section4">Sport</string>
-    <string name="title_section5">Entertainment</string>
-    <string name="title_section0">News</string>
-    <string name="title_menu">Category</string>
-    <string name="navigation_drawer_open">Open navigation drawer</string>
-    <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="action_example">Example action</string>
-    <string name="action_settings">Settings</string>
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="category">Category</string>
+
+    <string-array name="section_name">
+        <item>News</item>
+        <item>International</item>
+        <item>Economic</item>
+        <item>Science</item>
+        <item>Sport</item>
+        <item>Entertainment</item>
+    </string-array>
+
+    <string name="drawer_open">Open navigation drawer</string>
+    <string name="drawer_close">Close navigation drawer</string>
+    <string name="action_setting">Setting</string>
+    <string name="new_headline">News</string>
+    <string name="international_headline">International</string>
+    <string name="economic_headline">Economic</string>
+    <string name="science_headline">Science</string>
+    <string name="entertainment_headline">Entertainment</string>
+    <string name="sport_headline">Sport</string>
 
 </resources>

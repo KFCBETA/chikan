@@ -2,7 +2,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:id="@+id/international_RelativeLayout">
+    android:id="@+id/entertainment_RelativeLayout">
 
     <ScrollView
         android:layout_width="fill_parent"
@@ -17,8 +17,8 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/international_headLine"
-                android:text="@string/international_headline"
+                android:id="@+id/entertainment_headLine"
+                android:text="@string/entertainment_headline"
                 android:textSize="40sp"/>
             <LinearLayout
                 android:layout_width="wrap_content"
