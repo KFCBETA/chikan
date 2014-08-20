@@ -2,21 +2,33 @@ package com.KFCBETA.hjeaimreus.chikan;
 
 import android.app.Activity;
 import android.app.Fragment;
+import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.GravityCompat;
+import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
+
+import org.json.JSONException;
+
+import java.io.IOException;
+import java.net.URISyntaxException;
+import java.util.ArrayList;
 
 import fragment.EconomicFragment;
 import fragment.EntertainmentFragment;
@@ -32,6 +44,7 @@ public class DrawerActivity extends Activity {
     private ListView mainDrawerList;
     private ActionBarDrawerToggle mainDrawerToggle;
 
+
     private CharSequence mainDrawerTitle;
     private CharSequence mTitle;
     private String[] sectionTitle;
@@ -43,6 +56,18 @@ public class DrawerActivity extends Activity {
 
         mTitle = getTitle();
         sectionTitle = getResources().getStringArray(R.array.section_name);
+        /*
+        try {
+            ParseCategories parseCategories = new ParseCategories();
+            ArrayList<String> titles = (ArrayList<String>)parseCategories.getNavigationDrawerList().get(0);
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (URISyntaxException e) {
+            e.printStackTrace();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+            */
         mainDrawerLayout = (DrawerLayout)findViewById(R.id.drawer_layout);
         mainDrawerList = (ListView)findViewById(R.id.left_drawer);
 
@@ -53,6 +78,7 @@ public class DrawerActivity extends Activity {
 
         getActionBar().setDisplayHomeAsUpEnabled(true);
         getActionBar().setHomeButtonEnabled(true);
+
 
         mainDrawerToggle = new ActionBarDrawerToggle(
                 this,
