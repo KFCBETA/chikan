@@ -1,0 +1,1 @@
+update categories set 欄位 = 值 where id = 指定id
