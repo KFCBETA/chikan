@@ -1,5 +1,5 @@
 <?php
-	header("Content-type: text/html; charset=UTF-8");
+    header("Content-type: text/html; charset=UTF-8");
     require_once("DB_config.php");
     require_once("DB_class.php");
 
@@ -8,6 +8,8 @@
     $db->query("SELECT * FROM categories");
     while($result = $db->fetch_array())
     {
-        print_r(array_values($result));
+        $temp[] = $result;
     }
+    $output = json_encode($temp,JSON_UNESCAPED_UNICODE);
+    printf($output);
 ?>
