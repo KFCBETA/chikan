@@ -7,6 +7,8 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.json.JSONArray;
 import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -24,7 +26,7 @@ import java.util.ArrayList;
 public class ParseCategories {
     private final static String TAG = "ParseCategories";
     private final String link = "http://ea2ac45.ngrok.com/navigationitem";
-    private HttpClient httpClient = new DefaultHttpClient();
+    private HttpClient httpClient;
     private HttpGet request;
     private HttpResponse httpResponse;
     private BufferedReader bufferedReader;
@@ -33,6 +35,7 @@ public class ParseCategories {
 
     ParseCategories() {
         try {
+            httpClient = new DefaultHttpClient();
             request = new HttpGet(new URI(link));
             httpResponse = httpClient.execute(request);
         } catch (IOException e) {
@@ -51,10 +54,10 @@ public class ParseCategories {
             titles = new ArrayList<String>();
             bufferedReader = new BufferedReader(new InputStreamReader(httpResponse.getEntity().getContent()));
             String tempStr = bufferedReader.readLine();
+            Log.w(TAG,tempStr);
             JSONArray jsonArray = new JSONArray(tempStr);
             for (int i = 0; i < jsonArray.length(); i++) {
-                titles.add(jsonArray.getJSONObject(i).getString("titles"));
-                article_count.add(jsonArray.getJSONObject(i).getInt("article_count"));
+                titles.add(jsonArray.getJSONObject(i).getString("title"));
             }
         }catch (IOException e){
             onError(e);
