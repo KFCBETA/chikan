@@ -30,7 +30,6 @@ public class ParseCategories {
     private BufferedReader bufferedReader;
     private ArrayList<String> titles;
     private ArrayList<Integer> article_count;
-    private ArrayList navigationItem;
 
     ParseCategories() {
         try {
@@ -43,11 +42,13 @@ public class ParseCategories {
         }
     }
 
-    public ArrayList getNavigationDrawerList () {
+    /**
+     * Get titles in categories
+     * @return ArrayList<String>
+     */
+    public ArrayList<String> getTitles () {
         try {
             titles = new ArrayList<String>();
-            article_count = new ArrayList<Integer>();
-            navigationItem = new ArrayList();
             bufferedReader = new BufferedReader(new InputStreamReader(httpResponse.getEntity().getContent()));
             String tempStr = bufferedReader.readLine();
             JSONArray jsonArray = new JSONArray(tempStr);
@@ -55,15 +56,32 @@ public class ParseCategories {
                 titles.add(jsonArray.getJSONObject(i).getString("titles"));
                 article_count.add(jsonArray.getJSONObject(i).getInt("article_count"));
             }
-            navigationItem.add(titles);
-            navigationItem.add(article_count);
         }catch (IOException e){
             onError(e);
         } catch (JSONException e) {
             onError(e);
         }
-        return navigationItem;
+        return titles;
     }
+
+    public ArrayList<Integer> getArticleCount () {
+        article_count = new ArrayList<Integer>();
+        try {
+            bufferedReader = new BufferedReader(new InputStreamReader(httpResponse.getEntity().getContent()));
+            String tempStr = bufferedReader.readLine();
+            JSONArray jsonArray = new JSONArray(tempStr);
+            for (int i = 0; i < jsonArray.length(); i++) {
+                article_count.add(jsonArray.getJSONObject(i).getInt("article_count"));
+            }
+        } catch (IOException e) {
+            onError(e);
+        } catch (JSONException e) {
+            onError(e);
+        }
+        return article_count;
+    }
+
+
     private void onError(Exception e){
         Log.w(TAG,e.toString());
     }
