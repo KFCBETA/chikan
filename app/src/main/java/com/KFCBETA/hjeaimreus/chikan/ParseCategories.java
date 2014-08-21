@@ -35,6 +35,9 @@ public class ParseCategories {
     private ArrayList navigationItem;
 
     ParseCategories() throws IOException, URISyntaxException {
+        titles = new ArrayList<String>();
+        article_count = new ArrayList<Integer>();
+        navigationItem = new ArrayList();
         url = new URL(link);
         request = new HttpGet(new URI(link));
         httpResponse = httpClient.execute(request);
