@@ -23,7 +23,8 @@ import java.util.ArrayList;
  */
 public class ParseCategories {
     private final static String TAG = "ParseCategories";
-    private final String link = "http://ea2ac45.ngrok.com/navigationitem";
+    private final String categoryLink = "http://ea2ac45.ngrok.com/categories";
+    private final String intNews = "http://ea2ac45.ngrok.com/intNews";
     private HttpClient httpClient;
     private HttpGet request;
     private HttpResponse httpResponse;
@@ -32,15 +33,9 @@ public class ParseCategories {
     private ArrayList<Integer> article_count;
 
     ParseCategories() {
-        try {
-            httpClient = new DefaultHttpClient();
-            request = new HttpGet(new URI(link));
-            httpResponse = httpClient.execute(request);
-        } catch (IOException e) {
-            onError(e);
-        } catch (URISyntaxException e) {
-            onError(e);
-        }
+        article_count = new ArrayList<Integer>();
+        titles = new ArrayList<String>();
+        httpClient = new DefaultHttpClient();
     }
 
     /**
@@ -49,10 +44,10 @@ public class ParseCategories {
      */
     public ArrayList<String> getTitles () {
         try {
-            titles = new ArrayList<String>();
+            request = new HttpGet(new URI(categoryLink));
+            httpResponse = httpClient.execute(request);
             bufferedReader = new BufferedReader(new InputStreamReader(httpResponse.getEntity().getContent()));
             String tempStr = bufferedReader.readLine();
-            Log.w(TAG,tempStr);
             JSONArray jsonArray = new JSONArray(tempStr);
             for (int i = 0; i < jsonArray.length(); i++) {
                 titles.add(jsonArray.getJSONObject(i).getString("title"));
@@ -61,13 +56,16 @@ public class ParseCategories {
             onError(e);
         } catch (JSONException e) {
             onError(e);
+        } catch (URISyntaxException e) {
+            onError(e);
         }
         return titles;
     }
 
     public ArrayList<Integer> getArticleCount () {
-        article_count = new ArrayList<Integer>();
         try {
+            request = new HttpGet(new URI(intNews));
+            httpResponse = httpClient.execute(request);
             bufferedReader = new BufferedReader(new InputStreamReader(httpResponse.getEntity().getContent()));
             String tempStr = bufferedReader.readLine();
             JSONArray jsonArray = new JSONArray(tempStr);
@@ -77,6 +75,8 @@ public class ParseCategories {
         } catch (IOException e) {
             onError(e);
         } catch (JSONException e) {
+            onError(e);
+        } catch (URISyntaxException e) {
             onError(e);
         }
         return article_count;
