@@ -45,6 +45,9 @@ public class ParseCategories {
 
     public ArrayList getNavigationDrawerList () {
         try {
+            titles = new ArrayList<String>();
+            article_count = new ArrayList<Integer>();
+            navigationItem = new ArrayList();
             bufferedReader = new BufferedReader(new InputStreamReader(httpResponse.getEntity().getContent()));
             String tempStr = bufferedReader.readLine();
             JSONArray jsonArray = new JSONArray(tempStr);
