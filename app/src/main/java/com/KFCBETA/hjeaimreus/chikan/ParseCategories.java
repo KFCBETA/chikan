@@ -1,18 +1,17 @@
 package com.KFCBETA.hjeaimreus.chikan;
 
+import android.util.Log;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.json.JSONArray;
 import org.json.JSONException;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.net.URL;
 import java.util.ArrayList;
 
 
@@ -24,8 +23,7 @@ import java.util.ArrayList;
  */
 public class ParseCategories {
     private final static String TAG = "ParseCategories";
-    private final String link = "";
-    private URL url;
+    private final String link = "http://ea2ac45.ngrok.com/navigationitem";
     private HttpClient httpClient = new DefaultHttpClient();
     private HttpGet request;
     private HttpResponse httpResponse;
@@ -34,25 +32,37 @@ public class ParseCategories {
     private ArrayList<Integer> article_count;
     private ArrayList navigationItem;
 
-    ParseCategories() throws IOException, URISyntaxException {
-        url = new URL(link);
-        request = new HttpGet(new URI(link));
-        httpResponse = httpClient.execute(request);
+    ParseCategories() {
+        try {
+            request = new HttpGet(new URI(link));
+            httpResponse = httpClient.execute(request);
+        } catch (IOException e) {
+            onError(e);
+        } catch (URISyntaxException e) {
+            onError(e);
+        }
     }
 
-    public ArrayList getNavigationDrawerList () throws IOException, JSONException {
-        bufferedReader = new BufferedReader(new InputStreamReader(httpResponse.getEntity().getContent()));
-        titles = new ArrayList<String>();
-        article_count = new ArrayList<Integer>();
-        String tempStr = bufferedReader.readLine();
-        JSONArray jsonArray = new JSONArray(tempStr);
-        for (int i = 0 ; i < jsonArray.length() ; i++){
-            titles.add(jsonArray.getJSONObject(i).getString("titles"));
-            article_count.add(jsonArray.getJSONObject(i).getInt("article_count"));
+    public ArrayList getNavigationDrawerList () {
+        try {
+            bufferedReader = new BufferedReader(new InputStreamReader(httpResponse.getEntity().getContent()));
+            String tempStr = bufferedReader.readLine();
+            JSONArray jsonArray = new JSONArray(tempStr);
+            for (int i = 0; i < jsonArray.length(); i++) {
+                titles.add(jsonArray.getJSONObject(i).getString("titles"));
+                article_count.add(jsonArray.getJSONObject(i).getInt("article_count"));
+            }
+            navigationItem.add(titles);
+            navigationItem.add(article_count);
+        }catch (IOException e){
+            onError(e);
+        } catch (JSONException e) {
+            onError(e);
         }
-        navigationItem.add(titles);
-        navigationItem.add(article_count);
         return navigationItem;
+    }
+    private void onError(Exception e){
+        Log.w(TAG,e.toString());
     }
 
 }
