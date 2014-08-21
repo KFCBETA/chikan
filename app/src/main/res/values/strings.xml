@@ -22,5 +22,8 @@
     <string name="science_headline">Science</string>
     <string name="entertainment_headline">Entertainment</string>
     <string name="sport_headline">Sport</string>
+    <string name="title_activity_international_view_pager">InternationalViewPager</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
 
 </resources>

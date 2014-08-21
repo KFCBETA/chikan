@@ -38,7 +38,7 @@ import fragment.ScienceFragment;
 import fragment.SportFragment;
 
 
-public class DrawerActivity extends Activity {
+public class DrawerActivity extends FragmentActivity {
 
     private DrawerLayout mainDrawerLayout;
     private ListView mainDrawerList;
