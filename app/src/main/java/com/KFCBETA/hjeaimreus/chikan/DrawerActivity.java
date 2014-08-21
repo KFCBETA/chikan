@@ -54,8 +54,8 @@ public class DrawerActivity extends FragmentActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_drawer);
 
-        ParseCategories parseCategories = new ParseCategories();
-        ArrayList<String> titles = (ArrayList<String>)parseCategories.getNavigationDrawerList().get(0);
+        //ParseCategories parseCategories = new ParseCategories();
+        //ArrayList<String> titles = (ArrayList<String>)parseCategories.getNavigationDrawerList().get(0);
 
         mTitle = getTitle();
         sectionTitle = getResources().getStringArray(R.array.section_name);
