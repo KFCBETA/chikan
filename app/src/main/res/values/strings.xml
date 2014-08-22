@@ -2,12 +2,27 @@
 <resources>
 
     <string name="app_name">Chikan</string>
-    <string name="title_section1">Section 1</string>
-    <string name="title_section2">Section 2</string>
-    <string name="title_section3">Section 3</string>
-    <string name="navigation_drawer_open">Open navigation drawer</string>
-    <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="action_example">Example action</string>
-    <string name="action_settings">Settings</string>
+    <string name="category">Category</string>
+
+    <string-array name="section_name">
+        <item>News</item>
+        <item>International</item>
+        <item>Economic</item>
+        <item>Science</item>
+        <item>Sport</item>
+        <item>Entertainment</item>
+    </string-array>
+
+    <string name="drawer_open">Open navigation drawer</string>
+    <string name="drawer_close">Close navigation drawer</string>
+    <string name="action_setting">Setting</string>
+    <string name="new_headline">News</string>
+    <string name="international_headline">International</string>
+    <string name="economic_headline">Economic</string>
+    <string name="science_headline">Science</string>
+    <string name="entertainment_headline">Entertainment</string>
+    <string name="sport_headline">Sport</string>
+    <string name="title_activity_international_view_pager">InternationalViewPager</string>
+    <string name="title_activity_drawer_test">DrawerTest</string>
 
 </resources>
