@@ -37,7 +37,7 @@ public class InternationalFragment extends Fragment {
     {
         View view = inflater.inflate(R.layout.fragment_international,container,false);
 
-        international_string = new String[] {"Russian aid convoy into Ukraine called 'direct invasion'", "international_2",
+        international_string = new String[] {"Russian aid convoy into Ukraine called 'direct invasion'", "Report: At least 38 killed after tourist buses crash in Egypt",
                 "international_3", "international_4", "international_5", "international_6"};
 
         international_list = new ArrayList<HashMap<String, String>>();

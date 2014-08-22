@@ -29,7 +29,8 @@
         </activity>
         <activity
             android:name=".InternationalViewPager"
-            android:label="@string/title_activity_international_view_pager" >
+            android:label="@string/title_activity_international_view_pager"
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name=".DrawerActivity"

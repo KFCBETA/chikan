@@ -17,14 +17,16 @@
             android:text="@string/international_headline"
             android:textSize="40sp"
             android:layout_gravity="center"
-            android:textColor="#FFEBE452"/>
+            android:textColor="#FFEBE452"
+            android:typeface="serif"/>
 
             <LinearLayout
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:background="#FFD1C68D"
-                android:layout_marginTop="10dp">
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="20dp">
 
                 <ListView
                     android:layout_width="fill_parent"
@@ -35,7 +37,7 @@
                     android:layout_marginTop="10dp"
                     android:layout_marginLeft="10dp"
                     android:background="#FFFFFFFF"
-                    android:dividerHeight="10dp"
+                    android:dividerHeight="5dp"
                     android:divider="#FFD1C68D"/>
             </LinearLayout>
         </LinearLayout>
