@@ -9,6 +9,5 @@
             android:layout_height="wrap_content"
             android:id="@+id/international_text"
             android:textSize="30sp"
-            android:layout_centerInParent="true"
-            android:text="10"/>
+            android:layout_centerInParent="true"/>
 </RelativeLayout>
