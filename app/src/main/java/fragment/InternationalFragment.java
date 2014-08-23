@@ -3,6 +3,7 @@ package fragment;
 import android.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +15,8 @@ import android.widget.SimpleAdapter;
 import com.KFCBETA.hjeaimreus.chikan.InternationalViewPager;
 import com.KFCBETA.hjeaimreus.chikan.R;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -28,17 +31,54 @@ public class InternationalFragment extends Fragment {
     private String[] international_string;
     private List<HashMap<String, String>> international_list;
     private SimpleAdapter international_adapter;
-    private int[] international_image = new int[] {R.drawable.international_1, R.drawable.ic_action_accept, R.drawable.ic_action_accept, R.drawable.ic_action_accept,
-            R.drawable.ic_action_accept, R.drawable.ic_action_accept};
+    private int[] international_image;
     private RelativeLayout international_layout;
+
+
+    //the number of article
+    private int file_count = 2;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState)
     {
         View view = inflater.inflate(R.layout.fragment_international,container,false);
 
-        international_string = new String[] {"Russian aid convoy into Ukraine called 'direct invasion'", "Report: At least 38 killed after tourist buses crash in Egypt",
-                "international_3", "international_4", "international_5", "international_6"};
+        international_image = new  int[] {R.drawable.international_1,R.drawable.international_2};
+        international_string = new String[file_count];
+        for(int i=0;i<file_count;i++)
+        {
+            int size;
+            byte[] buffer;
+            String title_number;
+            InputStream file_in_title = null;
+            title_number = Integer.toString(i+1) + "_title.txt";
+
+            try {
+                file_in_title = getResources().getAssets().open(title_number);
+                size = file_in_title.available();
+                Log.w("title", "get");
+            } catch (IOException e) {
+                size = 1;
+                e.printStackTrace();
+            }
+            buffer = new byte[size];
+            try {
+                if(file_in_title != null)
+                {
+                    file_in_title.read(buffer);
+                }
+                else
+                {
+                    Log.w("title", "null");
+                }
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            String tmp_title = new String(buffer);
+
+            international_string[i] = tmp_title;
+        }
 
         international_list = new ArrayList<HashMap<String, String>>();
         for(int i=0;i<international_string.length;i++)
@@ -77,8 +117,5 @@ public class InternationalFragment extends Fragment {
 
         return view;
     }
-
-
-
 
 }
