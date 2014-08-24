@@ -2,30 +2,42 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:id="@+id/sport_RelativeLayout">
+    android:id="@+id/sport_RelativeLayout"
+    android:background="#FF3C5A98">
 
-    <ScrollView
+    <LinearLayout
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent">
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/sport_headLine"
+            android:text="@string/sport_headline"
+            android:textSize="40sp"
+            android:layout_gravity="center"
+            android:textColor="#FFFFFFFF"
+            android:typeface="serif"/>
 
         <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:gravity="center">
+            android:orientation="horizontal"
+            android:background="#FFE9EAEE"
+            android:layout_marginBottom="20dp">
 
-            <TextView
-                android:layout_width="wrap_content"
+            <ListView
+                android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/sport_headLine"
-                android:text="@string/sport_headline"
-                android:textSize="40sp"/>
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="fill_parent">
-
-
-            </LinearLayout>
+                android:id="@+id/sport_listview"
+                android:choiceMode="singleChoice"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="10dp"
+                android:background="#FFFFFFFF"
+                android:dividerHeight="5dp"
+                android:divider="#FFE9EAEE"/>
         </LinearLayout>
-    </ScrollView>
+    </LinearLayout>
 </RelativeLayout>
