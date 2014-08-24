@@ -14,12 +14,14 @@ import android.widget.TextView;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
 
 
 public class InternationalViewPager extends FragmentActivity {
 
     International_viewPaperAdapter international_viewAdapter;
     ViewPager viewPager;
+    private int file_count;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +29,7 @@ public class InternationalViewPager extends FragmentActivity {
         setContentView(R.layout.activity_international_view_pager);
         Bundle bundle = this.getIntent().getExtras();
         int position = bundle.getInt("position");
+        file_count = bundle.getInt("file_count");
 
         international_viewAdapter = new International_viewPaperAdapter(getSupportFragmentManager());
 
@@ -78,13 +81,19 @@ public class InternationalViewPager extends FragmentActivity {
 
         @Override
         public int getCount() {
-            return 7;
+            return file_count;
         }
 
+        private ArrayList<String> arrayList = new ArrayList<String>();
         @Override
         public CharSequence getPageTitle(int position)
         {
-            return "" + (position+1);
+            for(int i=0;i<file_count;i++)
+            {
+                arrayList.add(Integer.toString(i+1));
+            }
+
+            return arrayList.get(position);
         }
     }
 
@@ -100,9 +109,9 @@ public class InternationalViewPager extends FragmentActivity {
             Bundle args = getArguments();
             int chooice = args.getInt(index);
 
+            //read article from the file
             String title_number;
             title_number = Integer.toString(chooice) + ".txt";
-
             int size;
             byte[] buffer;
             try {
@@ -124,7 +133,7 @@ public class InternationalViewPager extends FragmentActivity {
             }
             String tmp = new String(buffer);
 
-
+            //read title from the file
             InputStream file_in_title = null;
             title_number = Integer.toString(chooice) + "_title.txt";
 
@@ -132,7 +141,7 @@ public class InternationalViewPager extends FragmentActivity {
                 file_in_title = getResources().getAssets().open(title_number);
                 size = file_in_title.available();
             } catch (IOException e) {
-                size = 1;
+                size = 0;
                 e.printStackTrace();
             }
             buffer = new byte[size];

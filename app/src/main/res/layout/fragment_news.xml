@@ -1,36 +1,67 @@
-<android.support.v4.view.ViewPager
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/pager"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent" >
-    <RelativeLayout
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:id="@+id/new_RelativeLayout">
+
+    <ScrollView
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:id="@+id/new_RelativeLayout">
+        android:layout_height="fill_parent">
 
-        <ScrollView
+        <LinearLayout
             android:layout_width="fill_parent"
-            android:layout_height="fill_parent">
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
-            <LinearLayout
-                android:layout_width="fill_parent"
+            <TextView
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:gravity="center">
+                android:id="@+id/new_headLine"
+                android:text="@string/new_headline"
+                android:textSize="40sp"
+                android:layout_gravity="center_horizontal"/>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:orientation="horizontal">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/new_headLine"
-                    android:text="@string/new_headline"
-                    android:textSize="40sp"/>
                 <LinearLayout
                     android:layout_width="wrap_content"
-                    android:layout_height="fill_parent">
+                    android:layout_height="fill_parent"
+                    android:orientation="vertical">
 
+                    <TextView
+                        android:layout_width="150dp"
+                        android:layout_height="200dp"
+                        android:background="#FF30D0FF"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginLeft="10dp"/>
 
-                </LinearLayout>
+                    </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="fill_parent"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="150dp"
+                        android:background="#FF72D116"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="10dp"
+                        android:text="123456789123546789123456789"
+                        android:layout_marginRight="10dp"/>
+
+                    <TextView
+                        android:layout_width="100dp"
+                        android:layout_height="140dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="10dp"
+                        android:background="#FFDB9F17"/>
+
+                    </LinearLayout>
             </LinearLayout>
-        </ScrollView>
-    </RelativeLayout>
-    </android.support.v4.view.ViewPager>
+        </LinearLayout>
+    </ScrollView>
+</RelativeLayout>

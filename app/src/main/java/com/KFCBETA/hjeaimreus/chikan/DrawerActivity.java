@@ -99,6 +99,11 @@ public class DrawerActivity extends Activity {
         mainListView.setOnItemClickListener(new DrawerItemClickListener());
 
         mainListView.setAdapter(mainAdapter);
+
+        if(savedInstanceState == null)
+        {
+            selectItem(0);
+        }
     }
 
     private class DrawerItemClickListener implements ListView.OnItemClickListener

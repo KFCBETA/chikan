@@ -43,6 +43,7 @@ public class InternationalFragment extends Fragment {
     {
         View view = inflater.inflate(R.layout.fragment_international,container,false);
 
+        //read section title from the file
         international_image = new  int[] {R.drawable.international_1,R.drawable.international_2};
         international_string = new String[file_count];
         for(int i=0;i<file_count;i++)
@@ -106,6 +107,7 @@ public class InternationalFragment extends Fragment {
 
                 Bundle bundle = new Bundle();
                 bundle.putInt("position",i);
+                bundle.putInt("file_count",file_count);
 
                 intent.putExtras(bundle);
                 intent.setClass(getActivity(), InternationalViewPager.class);
