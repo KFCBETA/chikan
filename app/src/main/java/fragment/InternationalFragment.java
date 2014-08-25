@@ -3,7 +3,6 @@ package fragment;
 import android.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -57,7 +56,6 @@ public class InternationalFragment extends Fragment {
             try {
                 file_in_title = getResources().getAssets().open(title_number);
                 size = file_in_title.available();
-                Log.w("title", "get");
             } catch (IOException e) {
                 size = 1;
                 e.printStackTrace();
@@ -67,10 +65,6 @@ public class InternationalFragment extends Fragment {
                 if(file_in_title != null)
                 {
                     file_in_title.read(buffer);
-                }
-                else
-                {
-                    Log.w("title", "null");
                 }
 
             } catch (IOException e) {
@@ -82,7 +76,7 @@ public class InternationalFragment extends Fragment {
         }
 
         international_list = new ArrayList<HashMap<String, String>>();
-        for(int i=0;i<international_string.length;i++)
+        for(int i=0;i<file_count;i++)
         {
             HashMap<String, String> tmp = new HashMap<String, String>();
             tmp.put(LISTIMAGE, Integer.toString(international_image[i]));
@@ -104,8 +98,8 @@ public class InternationalFragment extends Fragment {
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 
                 Intent intent = new Intent();
-
                 Bundle bundle = new Bundle();
+
                 bundle.putInt("position",i);
                 bundle.putInt("file_count",file_count);
 

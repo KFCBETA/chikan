@@ -3,7 +3,6 @@ package fragment;
 import android.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,11 +11,10 @@ import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.SimpleAdapter;
 
+import com.KFCBETA.hjeaimreus.chikan.DataBaseHelper;
 import com.KFCBETA.hjeaimreus.chikan.EconomicViewPager;
 import com.KFCBETA.hjeaimreus.chikan.R;
 
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -34,55 +32,34 @@ public class EconomicFragment extends Fragment {
     private int[] economic_image;
     private RelativeLayout economic_layout;
 
+    private ArrayList<ArrayList<String>> economicFragmentInput;
+    private DataBaseHelper dataBaseHelper;
 
     //the number of article
-    private int file_count = 3;
+    private int file_count;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState)
     {
         View view = inflater.inflate(R.layout.fragment_economic,container,false);
 
+        dataBaseHelper = new DataBaseHelper(getActivity());
+        economicFragmentInput = dataBaseHelper.getIntNews();
+
+        file_count = economicFragmentInput.get(0).size();
+
         //read section title from the file
-        economic_image = new  int[] {R.drawable.international_1,R.drawable.international_2, R.drawable.international_2};
+        economic_image = new  int[file_count];
         economic_string = new String[file_count];
+
         for(int i=0;i<file_count;i++)
         {
-            int size;
-            byte[] buffer;
-            String title_number;
-            InputStream file_in_title = null;
-            title_number = Integer.toString(i+1) + "_title.txt";
-
-            try {
-                file_in_title = getResources().getAssets().open(title_number);
-                size = file_in_title.available();
-                Log.w("title", "get");
-            } catch (IOException e) {
-                size = 1;
-                e.printStackTrace();
-            }
-            buffer = new byte[size];
-            try {
-                if(file_in_title != null)
-                {
-                    file_in_title.read(buffer);
-                }
-                else
-                {
-                    Log.w("title", "null");
-                }
-
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            String tmp_title = new String(buffer);
-
-            economic_string[i] = tmp_title;
+            economic_image[i] = R.drawable.ic_action_accept;
+            economic_string[i] = economicFragmentInput.get(0).get(i);
         }
 
         economic_list = new ArrayList<HashMap<String, String>>();
-        for(int i=0;i<economic_string.length;i++)
+        for(int i=0;i<file_count;i++)
         {
             HashMap<String, String> tmp = new HashMap<String, String>();
             tmp.put(LISTIMAGE, Integer.toString(economic_image[i]));

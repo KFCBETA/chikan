@@ -6,7 +6,10 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
@@ -50,8 +53,6 @@ public class InternationalViewPager extends FragmentActivity {
         switch(menu.getItemId())
         {
             case android.R.id.home:
-                //Intent upIntent = new Intent(this, DrawerActivity_test.class);
-                //startActivity(upIntent);
                 this.finish();
                 overridePendingTransition(R.anim.left_in,R.anim.right_out);
             return true;
@@ -74,7 +75,9 @@ public class InternationalViewPager extends FragmentActivity {
             android.support.v4.app.Fragment fragment_viewPager = new ViewFragment();
             Bundle args = new Bundle();
 
-            args.putInt(ViewFragment.index,position+1);
+            Log.w("position",""+position);
+
+            args.putInt(ViewFragment.index,position);
             fragment_viewPager.setArguments(args);
             return fragment_viewPager;
         }
@@ -101,6 +104,7 @@ public class InternationalViewPager extends FragmentActivity {
     {
         public static final String index = "index";
         InputStream file_in;
+        private int file_count = 2;
 
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
@@ -111,7 +115,7 @@ public class InternationalViewPager extends FragmentActivity {
 
             //read article from the file
             String title_number;
-            title_number = Integer.toString(chooice) + ".txt";
+            title_number = Integer.toString(chooice+1) + ".txt";
             int size;
             byte[] buffer;
             try {
@@ -135,7 +139,7 @@ public class InternationalViewPager extends FragmentActivity {
 
             //read title from the file
             InputStream file_in_title = null;
-            title_number = Integer.toString(chooice) + "_title.txt";
+            title_number = Integer.toString(chooice+1) + "_title.txt";
 
             try {
                 file_in_title = getResources().getAssets().open(title_number);
@@ -162,5 +166,13 @@ public class InternationalViewPager extends FragmentActivity {
 
             return view_viewpager;
         }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu)
+    {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.main, menu);
+        return super.onCreateOptionsMenu(menu);
     }
 }

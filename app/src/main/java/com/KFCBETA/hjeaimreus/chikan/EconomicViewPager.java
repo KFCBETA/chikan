@@ -1,7 +1,6 @@
 package com.KFCBETA.hjeaimreus.chikan;
 
 import android.app.ActionBar;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
@@ -9,13 +8,13 @@ import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.ArrayList;
 
 
@@ -29,7 +28,6 @@ public class EconomicViewPager extends FragmentActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_economic_view_pager);
-
 
         Bundle bundle = this.getIntent().getExtras();
         int position = bundle.getInt("position");
@@ -54,8 +52,6 @@ public class EconomicViewPager extends FragmentActivity {
         switch(menu.getItemId())
         {
             case android.R.id.home:
-                //Intent upIntent = new Intent(this, DrawerActivity_test.class);
-                //startActivity(upIntent);
                 this.finish();
                 overridePendingTransition(R.anim.left_in,R.anim.right_out);
                 return true;
@@ -78,7 +74,7 @@ public class EconomicViewPager extends FragmentActivity {
             android.support.v4.app.Fragment fragment_viewPager = new ViewFragment();
             Bundle args = new Bundle();
 
-            args.putInt(ViewFragment.index,position+1);
+            args.putInt(ViewFragment.index,position);
             fragment_viewPager.setArguments(args);
             return fragment_viewPager;
         }
@@ -105,12 +101,14 @@ public class EconomicViewPager extends FragmentActivity {
     {
         public static final String index = "index";
 
-
         private DataBaseHelper dataBaseHelper;
         private ArrayList<ArrayList<String>> economicInput;
         private String tmp;
         private String tmp_title;
+        private int file_count;
+
         private static final String TAG = "ViewFragment";
+
 
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
@@ -120,18 +118,27 @@ public class EconomicViewPager extends FragmentActivity {
 
             dataBaseHelper = new DataBaseHelper(getActivity());
             economicInput = dataBaseHelper.getIntNews();
+
+            file_count = economicInput.get(0).size();
+
             Log.w(TAG,economicInput.get(0).get(0));
             int chooice = args.getInt(index);
 
             //read article from the file
-            tmp_title = economicInput.get(0).get(chooice-1);
-            tmp = economicInput.get(1).get(chooice-1);
+            tmp_title = economicInput.get(0).get(chooice);
+            tmp = economicInput.get(1).get(chooice);
             ((TextView)view_viewpager.findViewById(R.id.economic_title)).setText(tmp_title);
             ((TextView)view_viewpager.findViewById(R.id.economic_article)).setText(tmp);
 
-
-
             return view_viewpager;
         }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu)
+    {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.main, menu);
+        return super.onCreateOptionsMenu(menu);
     }
 }

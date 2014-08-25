@@ -17,7 +17,6 @@
             android:screenOrientation="portrait" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -39,19 +38,23 @@
         </activity>
         <activity
             android:name=".EconomicViewPager"
-            android:label="@string/title_activity_economic_view_pager" >
+            android:label="@string/economic_headline"
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name=".ScienceViewPager"
-            android:label="@string/title_activity_science_view_pager" >
+            android:label="@string/science_headline"
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name=".SportViewPager"
-            android:label="@string/title_activity_sport_view_pager" >
+            android:label="@string/sport_headline"
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name=".EntertainmentViewPager"
-            android:label="@string/title_activity_entertainment_view_pager" >
+            android:label="@string/entertainment_headline"
+            android:screenOrientation="portrait">
         </activity>
     </application>
 
