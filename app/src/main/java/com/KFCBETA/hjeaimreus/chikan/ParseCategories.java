@@ -33,7 +33,7 @@ public class ParseCategories {
     private ArrayList<String> titles;
     private ArrayList<Integer> article_count;
 
-    ParseCategories() {
+    public ParseCategories() {
         article_count = new ArrayList<Integer>();
         titles = new ArrayList<String>();
         httpClient = new DefaultHttpClient();
