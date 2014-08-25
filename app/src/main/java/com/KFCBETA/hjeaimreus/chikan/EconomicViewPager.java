@@ -27,6 +27,7 @@ public class EconomicViewPager extends FragmentActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_economic_view_pager);
+
         Bundle bundle = this.getIntent().getExtras();
         int position = bundle.getInt("position");
         file_count = bundle.getInt("file_count");
@@ -102,6 +103,9 @@ public class EconomicViewPager extends FragmentActivity {
         public static final String index = "index";
         InputStream file_in;
 
+        private ParseCategories parseCategories;
+        private ArrayList<ArrayList<String>> intNews;
+
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
@@ -109,7 +113,14 @@ public class EconomicViewPager extends FragmentActivity {
             Bundle args = getArguments();
             int chooice = args.getInt(index);
 
+            parseCategories = new ParseCategories();
+            intNews = new ArrayList<ArrayList<String>>();
+
             //read article from the file
+
+            intNews = parseCategories.getIntNews();
+
+
             String title_number;
             title_number = Integer.toString(chooice) + ".txt";
             int size;
@@ -131,8 +142,8 @@ public class EconomicViewPager extends FragmentActivity {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            String tmp = new String(buffer);
-
+//            String tmp = new String(buffer);
+            String tmp = intNews.get(1).get(0);
             //read title from the file
             InputStream file_in_title = null;
             title_number = Integer.toString(chooice) + "_title.txt";
@@ -154,8 +165,8 @@ public class EconomicViewPager extends FragmentActivity {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            String tmp_title = new String(buffer);
-
+//            String tmp_title = new String(buffer);
+            String tmp_title = intNews.get(0).get(0);
 
             ((TextView)view_viewpager.findViewById(R.id.economic_title)).setText(tmp_title);
             ((TextView)view_viewpager.findViewById(R.id.economic_article)).setText(tmp);
