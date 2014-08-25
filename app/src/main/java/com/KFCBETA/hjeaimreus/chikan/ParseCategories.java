@@ -13,6 +13,7 @@ import java.io.InputStreamReader;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
+import java.util.Objects;
 
 
 /**
@@ -24,18 +25,23 @@ import java.util.ArrayList;
 public class ParseCategories {
     private final static String TAG = "ParseCategories";
     private final String categoryLink = "http://ea2ac45.ngrok.com/categories";
-    private final String intNews = "http://ea2ac45.ngrok.com/intNews";
-    private final String intNewsPics = "http://ea2ac45.ngrok.com/intNewsPics";
+    private final String intNewsLink = "http://ea2ac45.ngrok.com/intNews";
+    private final String intNewsPicsLink = "http://ea2ac45.ngrok.com/intNewsPics";
     private HttpClient httpClient;
     private HttpGet request;
     private HttpResponse httpResponse;
     private BufferedReader bufferedReader;
     private ArrayList<String> titles;
     private ArrayList<Integer> article_count;
+    private ArrayList<String> intNewsContent;
+    private ArrayList<Integer> intNewsid;
+    private ArrayList<String> intNewstitle;
+    private ArrayList<ArrayList<String>> intNews;
 
     public ParseCategories() {
         article_count = new ArrayList<Integer>();
         titles = new ArrayList<String>();
+        intNews = new ArrayList<ArrayList<String>>();
         httpClient = new DefaultHttpClient();
     }
 
@@ -65,7 +71,7 @@ public class ParseCategories {
 
     public ArrayList<Integer> getArticleCount () {
         try {
-            request = new HttpGet(new URI(intNews));
+            request = new HttpGet(new URI(categoryLink));
             httpResponse = httpClient.execute(request);
             bufferedReader = new BufferedReader(new InputStreamReader(httpResponse.getEntity().getContent()));
             String tempStr = bufferedReader.readLine();
@@ -81,6 +87,33 @@ public class ParseCategories {
             onError(e);
         }
         return article_count;
+    }
+
+    public ArrayList<ArrayList<String>> getIntNews () {
+        try {
+            intNewsid = new ArrayList<Integer>();
+            intNewstitle = new ArrayList<String>();
+            intNewsContent = new ArrayList<String>();
+            request = new HttpGet(new URI(intNewsLink));
+            httpResponse = httpClient.execute(request);
+            bufferedReader = new BufferedReader(new InputStreamReader(httpResponse.getEntity().getContent()));
+            String tempStr = bufferedReader.readLine();
+            JSONArray jsonArray = new JSONArray(tempStr);
+            for (int i = 0; i < jsonArray.length(); i++) {
+//                intNewsid.add((jsonArray.getJSONObject(i).getInt("id")));
+                intNewstitle.add(jsonArray.getJSONObject(i).getString("title"));
+                intNewsContent.add(jsonArray.getJSONObject(i).getString("content"));
+            }
+        } catch (IOException e) {
+            onError(e);
+        } catch (JSONException e) {
+            onError(e);
+        } catch (URISyntaxException e) {
+            onError(e);
+        }
+        intNews.add(intNewstitle);
+        intNews.add(intNewsContent);
+        return intNews;
     }
 
 
