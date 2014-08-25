@@ -7,6 +7,7 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -109,6 +110,7 @@ public class EconomicViewPager extends FragmentActivity {
         private ArrayList<ArrayList<String>> economicInput;
         private String tmp;
         private String tmp_title;
+        private static final String TAG = "ViewFragment";
 
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
@@ -118,16 +120,14 @@ public class EconomicViewPager extends FragmentActivity {
 
             dataBaseHelper = new DataBaseHelper(getActivity());
             economicInput = dataBaseHelper.getIntNews();
+            Log.w(TAG,economicInput.get(0).get(0));
             int chooice = args.getInt(index);
 
             //read article from the file
-            for(int i=0;i<economicInput.get(0).size();i++)
-            {
-                tmp_title = economicInput.get(0).get(i);
-                tmp = economicInput.get(1).get(i);
-                ((TextView)view_viewpager.findViewById(R.id.economic_title)).setText(tmp_title);
-                ((TextView)view_viewpager.findViewById(R.id.economic_article)).setText(tmp);
-            }
+            tmp_title = economicInput.get(0).get(chooice-1);
+            tmp = economicInput.get(1).get(chooice-1);
+            ((TextView)view_viewpager.findViewById(R.id.economic_title)).setText(tmp_title);
+            ((TextView)view_viewpager.findViewById(R.id.economic_article)).setText(tmp);
 
 
 

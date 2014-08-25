@@ -36,7 +36,7 @@ public class EconomicFragment extends Fragment {
 
 
     //the number of article
-    private int file_count = 2;
+    private int file_count = 3;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState)
@@ -44,7 +44,7 @@ public class EconomicFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_economic,container,false);
 
         //read section title from the file
-        economic_image = new  int[] {R.drawable.international_1,R.drawable.international_2};
+        economic_image = new  int[] {R.drawable.international_1,R.drawable.international_2, R.drawable.international_2};
         economic_string = new String[file_count];
         for(int i=0;i<file_count;i++)
         {

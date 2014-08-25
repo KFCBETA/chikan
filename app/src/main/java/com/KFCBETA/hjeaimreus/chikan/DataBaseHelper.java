@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.support.v4.util.LogWriter;
 import android.util.Log;
 
 import java.util.ArrayList;
@@ -50,9 +51,9 @@ public class DataBaseHelper extends SQLiteOpenHelper{
             for(int j = 0 ; j < intNews.get(0).size() ; j ++){
                 cv.put(KEY_TITLE, intNews.get(0).get(j));
                 cv.put(KEY_ARTICLE, intNews.get(1).get(j));
+                db.insert(TABLE_INTNEWS,null,cv);
             }
         }
-        db.insert(TABLE_INTNEWS,null,cv);
     }
 
     public ArrayList<ArrayList<String>> getIntNews(){
@@ -65,12 +66,17 @@ public class DataBaseHelper extends SQLiteOpenHelper{
             do {
                 temp1.add(c.getString(0));
                 temp2.add(c.getString(1));
-                Log.w(TAG,c.getString(0));
+                Log.w("Fuck temp 1",temp1.get(0)+c.getString(0));
             } while (c.moveToNext());
         }
         temp.add(temp1);
         temp.add(temp2);
         return temp;
+    }
+
+    public void deleteTable() {
+        SQLiteDatabase db = this.getReadableDatabase();
+        db.delete(TABLE_INTNEWS,null,null);
     }
 
 }
