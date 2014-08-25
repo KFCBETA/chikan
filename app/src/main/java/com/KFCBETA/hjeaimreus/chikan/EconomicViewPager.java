@@ -1,6 +1,7 @@
 package com.KFCBETA.hjeaimreus.chikan;
 
 import android.app.ActionBar;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
@@ -27,6 +28,7 @@ public class EconomicViewPager extends FragmentActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_economic_view_pager);
+
 
         Bundle bundle = this.getIntent().getExtras();
         int position = bundle.getInt("position");
@@ -103,70 +105,36 @@ public class EconomicViewPager extends FragmentActivity {
         public static final String index = "index";
         InputStream file_in;
 
-        private ParseCategories parseCategories;
-        private ArrayList<ArrayList<String>> intNews;
+
+        private DataBaseHelper dataBaseHelper;
+        private ArrayList<ArrayList<String>> ecoNews;
 
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
             View view_viewpager = inflater.inflate(R.layout.fragment_economic_view_pager,container,false);
             Bundle args = getArguments();
+
+            dataBaseHelper = new DataBaseHelper(getActivity());
+            ecoNews = dataBaseHelper.getIntNews();
+
+
             int chooice = args.getInt(index);
 
-            parseCategories = new ParseCategories();
-            intNews = new ArrayList<ArrayList<String>>();
 
             //read article from the file
-
-            intNews = parseCategories.getIntNews();
-
-
             String title_number;
             title_number = Integer.toString(chooice) + ".txt";
-            int size;
-            byte[] buffer;
-            try {
-                file_in = getResources().getAssets().open(title_number);
-                size = file_in.available();
-            } catch (IOException e) {
-                size = 1;
-                e.printStackTrace();
-            }
-            buffer = new byte[size];
-            try {
-                if(file_in != null)
-                {
-                    file_in.read(buffer);
-                }
 
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-//            String tmp = new String(buffer);
-            String tmp = intNews.get(1).get(0);
+            String tmp = ecoNews.get(1).get(chooice-1);
+
+
             //read title from the file
             InputStream file_in_title = null;
             title_number = Integer.toString(chooice) + "_title.txt";
 
-            try {
-                file_in_title = getResources().getAssets().open(title_number);
-                size = file_in_title.available();
-            } catch (IOException e) {
-                size = 0;
-                e.printStackTrace();
-            }
-            buffer = new byte[size];
-            try {
-                if(file_in_title != null)
-                {
-                    file_in_title.read(buffer);
-                }
 
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-//            String tmp_title = new String(buffer);
-            String tmp_title = intNews.get(0).get(0);
+            String tmp_title = ecoNews.get(0).get(chooice-1);
 
             ((TextView)view_viewpager.findViewById(R.id.economic_title)).setText(tmp_title);
             ((TextView)view_viewpager.findViewById(R.id.economic_article)).setText(tmp);
