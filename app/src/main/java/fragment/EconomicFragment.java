@@ -36,7 +36,7 @@ public class EconomicFragment extends Fragment {
 
 
     //the number of article
-    private int file_count = 1;
+    private int file_count = 2;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState)

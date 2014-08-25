@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 import java.util.ArrayList;
 
@@ -21,6 +22,7 @@ public class DataBaseHelper extends SQLiteOpenHelper{
     private static final String KEY_ID = "id";
     private static final String KEY_TITLE = "title";
     private static final String KEY_ARTICLE = "article";
+    private static final String TAG = "DataBaseHelper";
 
     public DataBaseHelper(Context context){
         super(context, DATABASE_NAME,null,DATABASE_VERSION);
@@ -63,6 +65,7 @@ public class DataBaseHelper extends SQLiteOpenHelper{
             do {
                 temp1.add(c.getString(0));
                 temp2.add(c.getString(1));
+                Log.w(TAG,c.getString(0));
             } while (c.moveToNext());
         }
         temp.add(temp1);

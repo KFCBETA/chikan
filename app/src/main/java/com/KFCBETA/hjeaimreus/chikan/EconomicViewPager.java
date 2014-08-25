@@ -103,11 +103,12 @@ public class EconomicViewPager extends FragmentActivity {
     public static class ViewFragment extends android.support.v4.app.Fragment
     {
         public static final String index = "index";
-        InputStream file_in;
 
 
         private DataBaseHelper dataBaseHelper;
         private ArrayList<ArrayList<String>> economicInput;
+        private String tmp;
+        private String tmp_title;
 
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
@@ -120,13 +121,15 @@ public class EconomicViewPager extends FragmentActivity {
             int chooice = args.getInt(index);
 
             //read article from the file
-            String tmp = economicInput.get(1).get(chooice-1);
+            for(int i=0;i<economicInput.get(0).size();i++)
+            {
+                tmp_title = economicInput.get(0).get(i);
+                tmp = economicInput.get(1).get(i);
+                ((TextView)view_viewpager.findViewById(R.id.economic_title)).setText(tmp_title);
+                ((TextView)view_viewpager.findViewById(R.id.economic_article)).setText(tmp);
+            }
 
-            //read title from the file
-            String tmp_title = economicInput.get(0).get(chooice-1);
 
-            ((TextView)view_viewpager.findViewById(R.id.economic_title)).setText(tmp_title);
-            ((TextView)view_viewpager.findViewById(R.id.economic_article)).setText(tmp);
 
             return view_viewpager;
         }
