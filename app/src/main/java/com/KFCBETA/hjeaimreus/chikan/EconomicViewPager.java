@@ -107,7 +107,7 @@ public class EconomicViewPager extends FragmentActivity {
 
 
         private DataBaseHelper dataBaseHelper;
-        private ArrayList<ArrayList<String>> ecoNews;
+        private ArrayList<ArrayList<String>> economicInput;
 
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
@@ -116,25 +116,14 @@ public class EconomicViewPager extends FragmentActivity {
             Bundle args = getArguments();
 
             dataBaseHelper = new DataBaseHelper(getActivity());
-            ecoNews = dataBaseHelper.getIntNews();
-
-
+            economicInput = dataBaseHelper.getIntNews();
             int chooice = args.getInt(index);
 
-
             //read article from the file
-            String title_number;
-            title_number = Integer.toString(chooice) + ".txt";
-
-            String tmp = ecoNews.get(1).get(chooice-1);
-
+            String tmp = economicInput.get(1).get(chooice-1);
 
             //read title from the file
-            InputStream file_in_title = null;
-            title_number = Integer.toString(chooice) + "_title.txt";
-
-
-            String tmp_title = ecoNews.get(0).get(chooice-1);
+            String tmp_title = economicInput.get(0).get(chooice-1);
 
             ((TextView)view_viewpager.findViewById(R.id.economic_title)).setText(tmp_title);
             ((TextView)view_viewpager.findViewById(R.id.economic_article)).setText(tmp);
