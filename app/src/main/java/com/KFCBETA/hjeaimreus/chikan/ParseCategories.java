@@ -25,6 +25,7 @@ public class ParseCategories {
     private final static String TAG = "ParseCategories";
     private final String categoryLink = "http://ea2ac45.ngrok.com/categories";
     private final String intNews = "http://ea2ac45.ngrok.com/intNews";
+    private final String intNewsPics = "http://ea2ac45.ngrok.com/intNewsPics";
     private HttpClient httpClient;
     private HttpGet request;
     private HttpResponse httpResponse;
