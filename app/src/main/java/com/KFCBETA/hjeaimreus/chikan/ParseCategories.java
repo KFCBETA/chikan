@@ -37,6 +37,7 @@ public class ParseCategories {
     private ArrayList<Integer> intNewsid;
     private ArrayList<String> intNewstitle;
     private ArrayList<ArrayList<String>> intNews;
+    private boolean isParseFinished = false;
 
     public ParseCategories() {
         article_count = new ArrayList<Integer>();
@@ -113,6 +114,7 @@ public class ParseCategories {
         }
         intNews.add(intNewstitle);
         intNews.add(intNewsContent);
+        isParseFinished = true;
         return intNews;
     }
 
@@ -121,4 +123,8 @@ public class ParseCategories {
         Log.w(TAG,e.toString());
     }
 
+    public boolean isParseFinished() {
+        return this.isParseFinished;
+    }
 }
+
