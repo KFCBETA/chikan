@@ -52,11 +52,11 @@ public class EntertainmentViewPager extends FragmentActivity {
         switch(menu.getItemId())
         {
             case android.R.id.home:
-                //Intent upIntent = new Intent(this, DrawerActivity_test.class);
-                //startActivity(upIntent);
                 this.finish();
                 overridePendingTransition(R.anim.left_in,R.anim.right_out);
-                return true;
+                break;
+            case R.id.setting:
+                break;
         }
 
         return super.onOptionsItemSelected(menu);
@@ -169,6 +169,8 @@ public class EntertainmentViewPager extends FragmentActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu)
     {
+        ActionBar bar = getActionBar();
+        bar.setDisplayHomeAsUpEnabled(true);
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.main, menu);
         return super.onCreateOptionsMenu(menu);

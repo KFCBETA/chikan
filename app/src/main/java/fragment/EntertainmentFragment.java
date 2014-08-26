@@ -12,6 +12,7 @@ import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.SimpleAdapter;
 
+import com.KFCBETA.hjeaimreus.chikan.DataBaseHelper;
 import com.KFCBETA.hjeaimreus.chikan.EntertainmentViewPager;
 import com.KFCBETA.hjeaimreus.chikan.R;
 
@@ -34,6 +35,8 @@ public class EntertainmentFragment extends Fragment {
     private int[] entertainment_image;
     private RelativeLayout entertainment_layout;
 
+    private ArrayList<ArrayList<String>> entertainmentFragmentInput;
+    private DataBaseHelper dataBaseHelper;
 
     //the number of article
     private int file_count = 0;
@@ -43,42 +46,19 @@ public class EntertainmentFragment extends Fragment {
     {
         View view = inflater.inflate(R.layout.fragment_entertainment,container,false);
 
+        dataBaseHelper = new DataBaseHelper(getActivity());
+        entertainmentFragmentInput = dataBaseHelper.getIntNews();
+
+        file_count = entertainmentFragmentInput.get(0).size();
+
         //read section title from the file
-        entertainment_image = new  int[] {R.drawable.international_1,R.drawable.international_2};
+        entertainment_image = new  int[file_count];
         entertainment_string = new String[file_count];
+
         for(int i=0;i<file_count;i++)
         {
-            int size;
-            byte[] buffer;
-            String title_number;
-            InputStream file_in_title = null;
-            title_number = Integer.toString(i+1) + "_title.txt";
-
-            try {
-                file_in_title = getResources().getAssets().open(title_number);
-                size = file_in_title.available();
-                Log.w("title", "get");
-            } catch (IOException e) {
-                size = 1;
-                e.printStackTrace();
-            }
-            buffer = new byte[size];
-            try {
-                if(file_in_title != null)
-                {
-                    file_in_title.read(buffer);
-                }
-                else
-                {
-                    Log.w("title", "null");
-                }
-
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            String tmp_title = new String(buffer);
-
-            entertainment_string[i] = tmp_title;
+            entertainment_image[i] = R.drawable.ic_action_accept;
+            entertainment_string[i] = entertainmentFragmentInput.get(0).get(i);
         }
 
         entertainment_list = new ArrayList<HashMap<String, String>>();

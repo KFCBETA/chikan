@@ -14,6 +14,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -46,21 +47,6 @@ public class InternationalViewPager extends FragmentActivity {
 
 
     }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem menu)
-    {
-        switch(menu.getItemId())
-        {
-            case android.R.id.home:
-                this.finish();
-                overridePendingTransition(R.anim.left_in,R.anim.right_out);
-            return true;
-        }
-
-        return super.onOptionsItemSelected(menu);
-    }
-
 
     public class International_viewPaperAdapter extends FragmentStatePagerAdapter
     {
@@ -171,8 +157,27 @@ public class InternationalViewPager extends FragmentActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu)
     {
+        ActionBar bar = getActionBar();
+        bar.setDisplayHomeAsUpEnabled(true);
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.main, menu);
         return super.onCreateOptionsMenu(menu);
+    }
+
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem menu)
+    {
+        switch(menu.getItemId())
+        {
+            case android.R.id.home:
+                this.finish();
+                overridePendingTransition(R.anim.left_in,R.anim.right_out);
+                break;
+            case R.id.setting:
+                break;
+        }
+
+        return super.onOptionsItemSelected(menu);
     }
 }

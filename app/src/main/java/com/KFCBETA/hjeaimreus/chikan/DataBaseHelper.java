@@ -46,13 +46,12 @@ public class DataBaseHelper extends SQLiteOpenHelper{
     public void addIntNews(ArrayList<ArrayList<String>> intNews) {
         SQLiteDatabase db = this.getReadableDatabase();
         ContentValues cv = new ContentValues();
-        for(int i = intNews.size()-1 ; i >= 0; i ++){
-            for(int j = intNews.get(0).size() ; j >= 0; j ++){
-                cv.put(KEY_TITLE, intNews.get(0).get(j));
-                cv.put(KEY_ARTICLE, intNews.get(1).get(j));
-                db.insert(TABLE_INTNEWS,null,cv);
-            }
+        for(int j = intNews.get(0).size()-1 ; j >= 0; j --){
+            cv.put(KEY_TITLE, intNews.get(0).get(j));
+            cv.put(KEY_ARTICLE, intNews.get(1).get(j));
+            db.insert(TABLE_INTNEWS,null,cv);
         }
+
     }
 
     public ArrayList<ArrayList<String>> getIntNews(){
@@ -65,7 +64,6 @@ public class DataBaseHelper extends SQLiteOpenHelper{
             do {
                 temp1.add(c.getString(0));
                 temp2.add(c.getString(1));
-                Log.w("Fuck temp 1",temp1.get(0)+c.getString(0));
             } while (c.moveToNext());
         }
         temp.add(temp1);

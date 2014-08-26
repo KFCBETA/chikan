@@ -8,11 +8,13 @@
         android:fromAlpha="1.0"
         android:toAlpha="0"
         android:startOffset="500"
-        android:duration="1000"/>
+        android:duration="2000"/>
 
     <rotate
         android:fromDegrees="0"
         android:toDegrees="360"
-        android:duration="1000"/>
+        android:duration="2000"
+        android:pivotX="50%"
+        android:pivotY="50%"/>
 
 </set>

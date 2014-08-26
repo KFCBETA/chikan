@@ -54,7 +54,9 @@ public class EconomicViewPager extends FragmentActivity {
             case android.R.id.home:
                 this.finish();
                 overridePendingTransition(R.anim.left_in,R.anim.right_out);
-                return true;
+                break;
+            case R.id.setting:
+                break;
         }
 
         return super.onOptionsItemSelected(menu);
@@ -137,6 +139,8 @@ public class EconomicViewPager extends FragmentActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu)
     {
+        ActionBar bar = getActionBar();
+        bar.setDisplayHomeAsUpEnabled(true);
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.main, menu);
         return super.onCreateOptionsMenu(menu);

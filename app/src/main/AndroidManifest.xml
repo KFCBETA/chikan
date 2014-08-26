@@ -24,7 +24,6 @@
             android:name="test.DrawerActivity_test"
             android:label="@string/category"
             android:screenOrientation="portrait" >
->
         </activity>
         <activity
             android:name=".InternationalViewPager"

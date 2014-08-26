@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.util.Log;
 
@@ -19,19 +21,29 @@ public class ChikanActivity extends Activity{
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
-        dataBaseHelper = new DataBaseHelper(this);
-        parseCategories = new ParseCategories();
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                intNews = parseCategories.getIntNews();
-            }
-        }).start();
-        while(!parseCategories.isParseFinished()){
+        ConnectivityManager CM = (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo info = CM.getActiveNetworkInfo();
+
+        if(info == null)
+        {
+            Log.w("network","null");
         }
-        Log.w(TAG,""+intNews.size());
-        dataBaseHelper.addIntNews(intNews);
-        Log.w("log","activity_1");
+        else
+        {
+            dataBaseHelper = new DataBaseHelper(this);
+            parseCategories = new ParseCategories();
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    intNews = parseCategories.getIntNews();
+                }
+            }).start();
+            while(!parseCategories.isParseFinished()){
+            }
+            dataBaseHelper.addIntNews(intNews);
+        }
+
+
         super.onCreate(savedInstanceState);
         Intent intent = new Intent();
 
