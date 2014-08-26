@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.SimpleAdapter;
@@ -42,9 +43,12 @@ public class InternationalFragment extends Fragment {
     {
         View view = inflater.inflate(R.layout.fragment_international,container,false);
 
+
         //read section title from the file
-        international_image = new  int[] {R.drawable.international_1,R.drawable.international_2};
+        international_image = new  int[] {2020,R.drawable.international_2};
         international_string = new String[file_count];
+
+
         for(int i=0;i<file_count;i++)
         {
             int size;

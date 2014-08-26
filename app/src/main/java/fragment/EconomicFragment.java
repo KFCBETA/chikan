@@ -2,17 +2,22 @@ package fragment;
 
 import android.app.Fragment;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.SimpleAdapter;
 
 import com.KFCBETA.hjeaimreus.chikan.DataBaseHelper;
 import com.KFCBETA.hjeaimreus.chikan.EconomicViewPager;
+import com.KFCBETA.hjeaimreus.chikan.ParseCategories;
 import com.KFCBETA.hjeaimreus.chikan.R;
 
 import java.util.ArrayList;
@@ -30,7 +35,7 @@ public class EconomicFragment extends Fragment {
     private List<HashMap<String, String>> economic_list;
     private SimpleAdapter economic_adapter;
     private int[] economic_image;
-    private RelativeLayout economic_layout;
+    private LinearLayout economic_layout;
 
     private ArrayList<ArrayList<String>> economicFragmentInput;
     private DataBaseHelper dataBaseHelper;
@@ -38,10 +43,17 @@ public class EconomicFragment extends Fragment {
     //the number of article
     private int file_count;
 
+    private Drawable tmp;
+    ParseCategories parseCategories;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState)
     {
+        //For testing
+        parseCategories = new ParseCategories();
         View view = inflater.inflate(R.layout.fragment_economic,container,false);
+
+        economic_layout = (LinearLayout)getActivity().findViewById(R.id.list_layout);
 
         dataBaseHelper = new DataBaseHelper(getActivity());
         economicFragmentInput = dataBaseHelper.getIntNews();
@@ -54,9 +66,15 @@ public class EconomicFragment extends Fragment {
 
         for(int i=0;i<file_count;i++)
         {
-            economic_image[i] = R.drawable.ic_action_accept;
+            economic_image[i] = 2;
             economic_string[i] = economicFragmentInput.get(0).get(i);
         }
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                tmp = parseCategories.getIntNewsPics();
+            }
+        }).start();
 
         economic_list = new ArrayList<HashMap<String, String>>();
         for(int i=0;i<file_count;i++)
@@ -71,6 +89,7 @@ public class EconomicFragment extends Fragment {
         int[] to = {R.id.list_image, R.id.list_title};
 
         economic_adapter = new SimpleAdapter(getActivity(),economic_list,R.layout.list_layout,from,to);
+
 
         economic_ListView = (ListView)view.findViewById(R.id.economic_listview);
 
