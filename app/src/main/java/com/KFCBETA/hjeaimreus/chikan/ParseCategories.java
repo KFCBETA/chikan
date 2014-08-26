@@ -1,5 +1,6 @@
 package com.KFCBETA.hjeaimreus.chikan;
 
+import android.graphics.drawable.Drawable;
 import android.util.Log;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
@@ -9,9 +10,11 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Objects;
 
@@ -118,6 +121,15 @@ public class ParseCategories {
         return intNews;
     }
 
+    public Drawable getIntNewsPics () {
+        try {
+            InputStream is = (InputStream) new URL(intNewsPicsLink).getContent();
+            Drawable d = Drawable.createFromStream(is, "src name");
+            return d;
+        } catch (Exception e) {
+            return null;
+        }
+    }
 
     private void onError(Exception e){
         Log.w(TAG,e.toString());
