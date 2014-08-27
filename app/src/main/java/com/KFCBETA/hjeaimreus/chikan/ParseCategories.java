@@ -32,9 +32,9 @@ import java.util.ArrayList;
  */
 public class ParseCategories {
     private final static String TAG = "ParseCategories";
-    private final String categoryLink = "http://ea2ac45.ngrok.com/categories";
-    private final String intNewsLink = "http://ea2ac45.ngrok.com/intNews";
-    private final String intNewsPicsLink = "http://ea2ac45.ngrok.com/intNewsPics";
+    private final String categoryLink = "http://4fb2ea2f.ngrok.com/categories";
+    private final String intNewsLink = "http://4fb2ea2f.ngrok.com/intNews";
+    private final String intNewsPicsLink = "http://4fb2ea2f.ngrok.com/intNewsPics";
     private HttpClient httpClient;
     private HttpGet request;
     private HttpResponse httpResponse;
