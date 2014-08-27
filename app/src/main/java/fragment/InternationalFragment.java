@@ -1,16 +1,19 @@
 package fragment;
 
 import android.app.Fragment;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.SimpleAdapter;
+import android.widget.TextView;
 
 import com.KFCBETA.hjeaimreus.chikan.InternationalViewPager;
 import com.KFCBETA.hjeaimreus.chikan.R;
@@ -45,7 +48,7 @@ public class InternationalFragment extends Fragment {
 
 
         //read section title from the file
-        international_image = new  int[] {2020,R.drawable.international_2};
+        international_image = new  int[] {R.drawable.international_1,R.drawable.international_2};
         international_string = new String[file_count];
 
 

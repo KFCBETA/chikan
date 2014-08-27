@@ -1,6 +1,7 @@
 package fragment;
 
 import android.app.Fragment;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -9,11 +10,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.SimpleAdapter;
+import android.widget.TextView;
 
 import com.KFCBETA.hjeaimreus.chikan.DataBaseHelper;
 import com.KFCBETA.hjeaimreus.chikan.EconomicViewPager;
@@ -46,6 +49,8 @@ public class EconomicFragment extends Fragment {
     private Drawable tmp;
     ParseCategories parseCategories;
 
+    CustomAdapter tmp_adapter;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState)
     {
@@ -53,15 +58,13 @@ public class EconomicFragment extends Fragment {
         parseCategories = new ParseCategories();
         View view = inflater.inflate(R.layout.fragment_economic,container,false);
 
-        economic_layout = (LinearLayout)getActivity().findViewById(R.id.list_layout);
-
         dataBaseHelper = new DataBaseHelper(getActivity());
         economicFragmentInput = dataBaseHelper.getIntNews();
 
         file_count = economicFragmentInput.get(0).size();
 
         //read section title from the file
-        economic_image = new  int[file_count];
+        economic_image = new int[file_count];
         economic_string = new String[file_count];
 
         for(int i=0;i<file_count;i++)
@@ -93,7 +96,9 @@ public class EconomicFragment extends Fragment {
 
         economic_ListView = (ListView)view.findViewById(R.id.economic_listview);
 
-        economic_ListView.setAdapter(economic_adapter);
+        tmp_adapter = new CustomAdapter(getActivity(),R.layout.list_layout,economic_string);
+
+        economic_ListView.setAdapter(tmp_adapter);
 
         economic_ListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -116,4 +121,27 @@ public class EconomicFragment extends Fragment {
         return view;
     }
 
+
+
+    public class CustomAdapter extends ArrayAdapter<String> {
+
+        public CustomAdapter(Context context, int resource, String[] objects) {
+            super(context, resource, objects);
+        }
+
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent)
+        {
+            LayoutInflater inflater = getActivity().getLayoutInflater();
+            View row = inflater.inflate(R.layout.list_layout,parent, false);
+
+            TextView title = (TextView)row.findViewById(R.id.list_title);
+            title.setText(economic_string[position]);
+
+            ImageView image = (ImageView)row.findViewById(R.id.list_image);
+            image.setImageDrawable(tmp);
+
+            return row;
+        }
+    }
 }
