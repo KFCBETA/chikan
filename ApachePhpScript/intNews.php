@@ -8,8 +8,8 @@
     $db->query("SELECT * FROM intNews");
     while($result = $db->fetch_array())
     {
-        $temp2[] = str_replace("\n", "", $result);
+        $temp[] = str_replace("\n", "\n", $result);
     }
-    $output = json_encode($temp2,JSON_UNESCAPED_UNICODE);
+    $output = json_encode($temp,JSON_UNESCAPED_UNICODE);
     printf($output);
 ?>

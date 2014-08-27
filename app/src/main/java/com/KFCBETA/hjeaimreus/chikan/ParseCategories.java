@@ -1,5 +1,9 @@
 package com.KFCBETA.hjeaimreus.chikan;
 
+import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.util.Log;
 import org.apache.http.HttpResponse;
@@ -9,6 +13,8 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import org.json.JSONArray;
 import org.json.JSONException;
 import java.io.BufferedReader;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -16,7 +22,6 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.Objects;
 
 
 /**
@@ -27,9 +32,9 @@ import java.util.Objects;
  */
 public class ParseCategories {
     private final static String TAG = "ParseCategories";
-    private final String categoryLink = "http://ea2ac45.ngrok.com/categories";
-    private final String intNewsLink = "http://ea2ac45.ngrok.com/intNews";
-    private final String intNewsPicsLink = "http://ea2ac45.ngrok.com/intNewsPics";
+    private final String categoryLink = "http://4fb2ea2f.ngrok.com/categories";
+    private final String intNewsLink = "http://4fb2ea2f.ngrok.com/intNews";
+    private final String intNewsPicsLink = "http://4fb2ea2f.ngrok.com/intNewsPics";
     private HttpClient httpClient;
     private HttpGet request;
     private HttpResponse httpResponse;
@@ -37,7 +42,7 @@ public class ParseCategories {
     private ArrayList<String> titles;
     private ArrayList<Integer> article_count;
     private ArrayList<String> intNewsContent;
-    private ArrayList<Integer> intNewsid;
+//    private ArrayList<Integer> intNewsid;
     private ArrayList<String> intNewstitle;
     private ArrayList<ArrayList<String>> intNews;
     private boolean isParseFinished = false;
@@ -93,9 +98,14 @@ public class ParseCategories {
         return article_count;
     }
 
+
+    /**
+     * get International arraylist with id,title and article included.
+     * @return ArrayList
+     */
     public ArrayList<ArrayList<String>> getIntNews () {
         try {
-            intNewsid = new ArrayList<Integer>();
+//            intNewsid = new ArrayList<Integer>();
             intNewstitle = new ArrayList<String>();
             intNewsContent = new ArrayList<String>();
             request = new HttpGet(new URI(intNewsLink));
@@ -121,14 +131,33 @@ public class ParseCategories {
         return intNews;
     }
 
-    public Drawable getIntNewsPics () {
+    /**
+     * get International news pics.
+     * @return Image in byte array
+     */
+    public byte[] getIntNewsPics () {
         try {
             InputStream is = (InputStream) new URL(intNewsPicsLink).getContent();
             Drawable d = Drawable.createFromStream(is, "src name");
-            return d;
+            Bitmap bitmap = ((BitmapDrawable)d).getBitmap();
+            ByteArrayOutputStream stream = new ByteArrayOutputStream();
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, stream);
+            byte[] image = stream.toByteArray();
+            return image;
         } catch (Exception e) {
             return null;
         }
+    }
+
+    /**
+     * Transfer the getBlob output into Drawable object.
+     * @param b getBlob output
+     * @param context Current context
+     * @return Drawable of getBlob from sqlDataBase
+     */
+    public Drawable intoDrawable(byte[] b,Context context){
+        ByteArrayInputStream is = new ByteArrayInputStream(b);
+        return new BitmapDrawable(context.getResources(),BitmapFactory.decodeStream(is));
     }
 
     private void onError(Exception e){
