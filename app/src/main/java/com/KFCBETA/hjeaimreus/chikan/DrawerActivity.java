@@ -3,24 +3,19 @@ package com.KFCBETA.hjeaimreus.chikan;
 import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
-import android.content.Context;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
+import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
-import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -85,6 +80,8 @@ public class DrawerActivity extends Activity {
         String[] from = {SECTIONICON, SECTIONTITLE, SECTIONCOUNT};
         int[] to = {R.id.sectionicon , R.id.sectiontitle, R.id.sectioncount};
         mainDrawerLayout = (DrawerLayout)findViewById(R.id.drawer_layout);
+
+        mainDrawerLayout.setDrawerShadow(R.drawable.drawer_shadow, GravityCompat.START);
 
         mainAdapter = new SimpleAdapter(this,mainList,R.layout.drawer_layout,from,to);
 
