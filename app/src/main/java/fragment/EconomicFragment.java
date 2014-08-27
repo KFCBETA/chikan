@@ -30,15 +30,9 @@ import java.util.List;
 
 public class EconomicFragment extends Fragment {
 
-    final private String LISTIMAGE = "image";
-    final private String LISTTITLE = "title";
-
     private ListView economic_ListView;
     private String[] economic_string;
-    private List<HashMap<String, String>> economic_list;
-    private SimpleAdapter economic_adapter;
-    private int[] economic_image;
-    private LinearLayout economic_layout;
+    private Drawable[] economic_image;
 
     private ArrayList<ArrayList<String>> economicFragmentInput;
     private DataBaseHelper dataBaseHelper;
@@ -46,7 +40,7 @@ public class EconomicFragment extends Fragment {
     //the number of article
     private int file_count;
 
-    private Drawable tmp;
+    private Drawable drawableInput;
     ParseCategories parseCategories;
 
     CustomAdapter tmp_adapter;
@@ -64,35 +58,23 @@ public class EconomicFragment extends Fragment {
         file_count = economicFragmentInput.get(0).size();
 
         //read section title from the file
-        economic_image = new int[file_count];
+        economic_image = new Drawable[file_count];
         economic_string = new String[file_count];
 
-        for(int i=0;i<file_count;i++)
-        {
-            economic_image[i] = 2;
-            economic_string[i] = economicFragmentInput.get(0).get(i);
-        }
         new Thread(new Runnable() {
             @Override
             public void run() {
-                tmp = parseCategories.getIntNewsPics();
+                drawableInput = parseCategories.intoDrawable(parseCategories.getIntNewsPics(),getActivity());
             }
         }).start();
+        while(drawableInput == null){
 
-        economic_list = new ArrayList<HashMap<String, String>>();
+        }
         for(int i=0;i<file_count;i++)
         {
-            HashMap<String, String> tmp = new HashMap<String, String>();
-            tmp.put(LISTIMAGE, Integer.toString(economic_image[i]));
-            tmp.put(LISTTITLE,economic_string[i]);
-            economic_list.add(tmp);
+            economic_image[i] = drawableInput;
+            economic_string[i] = economicFragmentInput.get(0).get(i);
         }
-
-        String[] from = {LISTIMAGE, LISTTITLE};
-        int[] to = {R.id.list_image, R.id.list_title};
-
-        economic_adapter = new SimpleAdapter(getActivity(),economic_list,R.layout.list_layout,from,to);
-
 
         economic_ListView = (ListView)view.findViewById(R.id.economic_listview);
 
@@ -122,7 +104,6 @@ public class EconomicFragment extends Fragment {
     }
 
 
-
     public class CustomAdapter extends ArrayAdapter<String> {
 
         public CustomAdapter(Context context, int resource, String[] objects) {
@@ -134,12 +115,11 @@ public class EconomicFragment extends Fragment {
         {
             LayoutInflater inflater = getActivity().getLayoutInflater();
             View row = inflater.inflate(R.layout.list_layout,parent, false);
-
             TextView title = (TextView)row.findViewById(R.id.list_title);
             title.setText(economic_string[position]);
-
             ImageView image = (ImageView)row.findViewById(R.id.list_image);
-            image.setImageDrawable(tmp);
+
+            image.setImageDrawable(drawableInput);
 
             return row;
         }

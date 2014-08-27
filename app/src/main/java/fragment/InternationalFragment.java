@@ -3,6 +3,7 @@ package fragment;
 import android.app.Fragment;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -27,15 +28,12 @@ import java.util.List;
 
 public class InternationalFragment extends Fragment {
 
-    final private String LISTIMAGE = "image";
-    final private String LISTTITLE = "title";
 
     private ListView international_ListView;
     private String[] international_string;
-    private List<HashMap<String, String>> international_list;
-    private SimpleAdapter international_adapter;
-    private int[] international_image;
-    private RelativeLayout international_layout;
+    private Drawable[] international_image;
+
+    CustomAdapter tmp_adapter;
 
 
     //the number of article
@@ -48,7 +46,7 @@ public class InternationalFragment extends Fragment {
 
 
         //read section title from the file
-        international_image = new  int[] {R.drawable.international_1,R.drawable.international_2};
+        international_image = new Drawable[file_count];
         international_string = new String[file_count];
 
 
@@ -82,23 +80,11 @@ public class InternationalFragment extends Fragment {
             international_string[i] = tmp_title;
         }
 
-        international_list = new ArrayList<HashMap<String, String>>();
-        for(int i=0;i<file_count;i++)
-        {
-            HashMap<String, String> tmp = new HashMap<String, String>();
-            tmp.put(LISTIMAGE, Integer.toString(international_image[i]));
-            tmp.put(LISTTITLE,international_string[i]);
-            international_list.add(tmp);
-        }
-
-        String[] from = {LISTIMAGE, LISTTITLE};
-        int[] to = {R.id.list_image, R.id.list_title};
-
-        international_adapter = new SimpleAdapter(getActivity(),international_list,R.layout.list_layout,from,to);
+        tmp_adapter = new CustomAdapter(getActivity(),R.layout.list_layout,international_string);
 
         international_ListView = (ListView)view.findViewById(R.id.international_listview);
 
-        international_ListView.setAdapter(international_adapter);
+        international_ListView.setAdapter(tmp_adapter);
 
         international_ListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -121,4 +107,25 @@ public class InternationalFragment extends Fragment {
         return view;
     }
 
+
+    public class CustomAdapter extends ArrayAdapter<String> {
+
+        public CustomAdapter(Context context, int resource, String[] objects) {
+            super(context, resource, objects);
+        }
+
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent)
+        {
+            LayoutInflater inflater = getActivity().getLayoutInflater();
+            View row = inflater.inflate(R.layout.list_layout,parent, false);
+            TextView title = (TextView)row.findViewById(R.id.list_title);
+            title.setText(international_string[position]);
+            ImageView image = (ImageView)row.findViewById(R.id.list_image);
+
+            image.setImageResource(R.drawable.ic_action_accept);
+
+            return row;
+        }
+    }
 }

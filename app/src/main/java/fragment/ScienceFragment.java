@@ -1,16 +1,21 @@
 package fragment;
 
 import android.app.Fragment;
+import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.SimpleAdapter;
+import android.widget.TextView;
 
 import com.KFCBETA.hjeaimreus.chikan.DataBaseHelper;
 import com.KFCBETA.hjeaimreus.chikan.R;
@@ -25,21 +30,17 @@ import java.util.List;
 
 public class ScienceFragment extends Fragment {
 
-    final private String LISTIMAGE = "image";
-    final private String LISTTITLE = "title";
-
     private ListView science_ListView;
     private String[] science_string;
-    private List<HashMap<String, String>> science_list;
-    private SimpleAdapter science_adapter;
-    private int[] science_image;
-    private RelativeLayout science_layout;
+    private Drawable[] science_image;
 
     private ArrayList<ArrayList<String>> scienceFragmentInput;
     private DataBaseHelper dataBaseHelper;
 
     //the number of article
     private int file_count = 0;
+
+    CustomAdapter science_adapter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState)
@@ -52,32 +53,18 @@ public class ScienceFragment extends Fragment {
         file_count = scienceFragmentInput.get(0).size();
 
         //read section title from the file
-        science_image = new  int[file_count];
+        science_image = new Drawable[file_count];
         science_string = new String[file_count];
         for(int i=0;i<file_count;i++)
         {
-            science_image[i] = R.drawable.ic_action_accept;
+            //science_image[i] = ;
             science_string[i] = scienceFragmentInput.get(0).get(i);
         }
 
-        science_list = new ArrayList<HashMap<String, String>>();
-        for(int i=0;i<science_string.length;i++)
-        {
-            HashMap<String, String> tmp = new HashMap<String, String>();
-            tmp.put(LISTIMAGE, Integer.toString(science_image[i]));
-            tmp.put(LISTTITLE,science_string[i]);
-            science_list.add(tmp);
-        }
-
-        String[] from = {LISTIMAGE, LISTTITLE};
-        int[] to = {R.id.list_image, R.id.list_title};
-
-        science_adapter = new SimpleAdapter(getActivity(),science_list,R.layout.list_layout,from,to);
+        science_adapter = new CustomAdapter(getActivity(),R.layout.list_layout,science_string);
 
         science_ListView = (ListView)view.findViewById(R.id.science_listview);
-
         science_ListView.setAdapter(science_adapter);
-
         science_ListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
@@ -99,4 +86,24 @@ public class ScienceFragment extends Fragment {
         return view;
     }
 
+    public class CustomAdapter extends ArrayAdapter<String> {
+
+        public CustomAdapter(Context context, int resource, String[] objects) {
+            super(context, resource, objects);
+        }
+
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent)
+        {
+            LayoutInflater inflater = getActivity().getLayoutInflater();
+            View row = inflater.inflate(R.layout.list_layout,parent, false);
+            TextView title = (TextView)row.findViewById(R.id.list_title);
+            title.setText(science_string[position]);
+            ImageView image = (ImageView)row.findViewById(R.id.list_image);
+
+            image.setImageResource(R.drawable.ic_action_accept);
+
+            return row;
+        }
+    }
 }

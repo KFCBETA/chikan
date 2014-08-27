@@ -123,7 +123,6 @@ public class EconomicViewPager extends FragmentActivity {
 
             file_count = economicInput.get(0).size();
 
-            Log.w(TAG,economicInput.get(0).get(0));
             int chooice = args.getInt(index);
 
             //read article from the file
