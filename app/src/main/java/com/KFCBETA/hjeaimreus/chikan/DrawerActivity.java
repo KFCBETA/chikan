@@ -212,4 +212,12 @@ public class DrawerActivity extends Activity {
         mainDrawertoggle.onConfigurationChanged(newConfig);
     }
 
+    @Override
+    public void onResume()
+    {
+        super.onResume();
+
+        View decorView = getWindow().getDecorView();
+        decorView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_FULLSCREEN);
+    }
 }
