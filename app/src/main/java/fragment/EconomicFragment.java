@@ -61,15 +61,15 @@ public class EconomicFragment extends Fragment {
         economic_image = new Drawable[file_count];
         economic_string = new String[file_count];
 
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                drawableInput = parseCategories.intoDrawable(parseCategories.getIntNewsPics(),getActivity());
-            }
-        }).start();
-        while(drawableInput == null){
+//        new Thread(new Runnable() {
+//            @Override
+//            public void run() {
+//                drawableInput = parseCategories.intoDrawable(parseCategories.getIntNewsPics(),getActivity());
+//            }
+//        }).start();
+//        while(drawableInput == null){
+//        }
 
-        }
         for(int i=0;i<file_count;i++)
         {
             economic_image[i] = drawableInput;

@@ -16,12 +16,6 @@ public class NewsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
         View view = inflater.inflate(R.layout.fragment_news, container, false);
-
-        TextView textView = (TextView)view.findViewById(R.id.new_headLine);
-
-        Typeface font = Typeface.createFromAsset(getActivity().getAssets(),"fonts/Roboto-Black.ttf");
-        textView.setTypeface(font);
-
         return view;
     }
 

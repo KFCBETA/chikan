@@ -39,7 +39,6 @@ public class DrawerActivity extends Activity {
     }
 
     private CharSequence mainTitle;
-    private CharSequence mainDrawerTitle;
 
     private String[] SectionTitle;
     private int[] SectionIcon = new int[] {R.drawable.ic_action_accept, R.drawable.ic_action_accept, R.drawable.ic_action_accept, R.drawable.ic_action_accept,
@@ -97,7 +96,7 @@ public class DrawerActivity extends Activity {
             }
             public void onDrawerOpen(View view)
             {
-                getActionBar().setTitle(mainDrawerTitle);
+                getActionBar().setTitle(R.string.category);
                 invalidateOptionsMenu();
             }
         };
@@ -217,7 +216,5 @@ public class DrawerActivity extends Activity {
     {
         super.onResume();
 
-        View decorView = getWindow().getDecorView();
-        decorView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_FULLSCREEN);
     }
 }
