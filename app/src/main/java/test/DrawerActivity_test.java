@@ -8,7 +8,6 @@ import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -97,7 +96,7 @@ public class DrawerActivity_test extends FragmentActivity {
     public boolean onPrepareOptionsMenu(Menu menu) {
         // If the nav drawer is open, hide action items related to the content view
         boolean drawerOpen = mainDrawerLayout.isDrawerOpen(mainDrawerList);
-        menu.findItem(R.id.setting).setVisible(!drawerOpen);
+//        menu.findItem(R.id.setting).setVisible(!drawerOpen);
         return super.onPrepareOptionsMenu(menu);
     }
 
@@ -112,10 +111,8 @@ public class DrawerActivity_test extends FragmentActivity {
 
         switch(item.getItemId())
         {
-            case R.id.setting:
-
-                Log.w("setting", "is clicked");
-                return true;
+//            case R.id.setting:
+//            return true;
 
             default:
                 return super.onOptionsItemSelected(item);

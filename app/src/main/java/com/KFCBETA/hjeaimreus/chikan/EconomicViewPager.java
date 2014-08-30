@@ -6,7 +6,6 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -55,8 +54,8 @@ public class EconomicViewPager extends FragmentActivity {
                 this.finish();
                 overridePendingTransition(R.anim.left_in,R.anim.right_out);
                 break;
-            case R.id.setting:
-                break;
+//            case R.id.setting:
+//                break;
         }
 
         return super.onOptionsItemSelected(menu);

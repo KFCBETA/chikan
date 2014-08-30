@@ -185,8 +185,8 @@ public class DrawerActivity extends Activity {
 
         switch(item.getItemId())
         {
-            case R.id.setting:
-                return true;
+//            case R.id.setting:
+//                return true;
         }
         return super.onOptionsItemSelected(item);
     }

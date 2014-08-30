@@ -6,14 +6,14 @@
 
     <style name="MyActionBar"
         parent="@android:style/Widget.Holo.Light.ActionBar.Solid.Inverse">
-        <item name="android:background">#FF303F9F</item>
+        <item name="android:background">#303F9F</item>
         <item name="android:titleTextStyle">@style/MyTitleSize</item>
         <item name="android:height">70dp</item>
     </style>
 
    <style name="MyTitleSize"
        parent="@android:TextAppearance.Holo.Medium.Inverse">
-       <item name="android:textSize">40sp</item>
+       <item name="android:textSize">35sp</item>
    </style>
 
 </resources>

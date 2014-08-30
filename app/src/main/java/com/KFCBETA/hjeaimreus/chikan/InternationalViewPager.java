@@ -15,7 +15,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -175,8 +174,8 @@ public class InternationalViewPager extends FragmentActivity {
                 this.finish();
                 overridePendingTransition(R.anim.left_in,R.anim.right_out);
                 break;
-            case R.id.setting:
-                break;
+//            case R.id.setting:
+//                break;
         }
 
         return super.onOptionsItemSelected(menu);

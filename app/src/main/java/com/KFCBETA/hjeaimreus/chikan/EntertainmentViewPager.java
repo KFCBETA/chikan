@@ -55,8 +55,8 @@ public class EntertainmentViewPager extends FragmentActivity {
                 this.finish();
                 overridePendingTransition(R.anim.left_in,R.anim.right_out);
                 break;
-            case R.id.setting:
-                break;
+//            case R.id.setting:
+//                break;
         }
 
         return super.onOptionsItemSelected(menu);
