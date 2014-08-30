@@ -15,6 +15,7 @@ import java.util.ArrayList;
 public class ChikanActivity extends Activity{
     private ParseCategories parseCategories;
     private ArrayList<ArrayList<String>> intNews;
+    private byte[] image;
     private DataBaseHelper dataBaseHelper;
     private static final String TAG = "ChikanActivity";
 
@@ -36,6 +37,7 @@ public class ChikanActivity extends Activity{
                 @Override
                 public void run() {
                     intNews = parseCategories.getIntNews();
+                    image = parseCategories.getIntNewsPics();
                 }
             }).start();
             while(!parseCategories.isParseFinished()){

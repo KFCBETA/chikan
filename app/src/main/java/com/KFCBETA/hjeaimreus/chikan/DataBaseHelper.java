@@ -22,6 +22,7 @@ public class DataBaseHelper extends SQLiteOpenHelper{
     private static final String KEY_ID = "id";
     private static final String KEY_TITLE = "title";
     private static final String KEY_ARTICLE = "article";
+    private static final String KEY_IMAGE = "image";
     private static final String TAG = "DataBaseHelper";
 
     public DataBaseHelper(Context context){
@@ -34,7 +35,7 @@ public class DataBaseHelper extends SQLiteOpenHelper{
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
         String sql = "CREATE TABLE IF NOT EXISTS intNews " + "(title NVARCHAR(20)" + ","
-                + "article NVARCHAR(15000))";
+                + "article NVARCHAR(15000))" + "," + "image BLOB";
         sqLiteDatabase.execSQL(sql);
     }
 
@@ -52,6 +53,13 @@ public class DataBaseHelper extends SQLiteOpenHelper{
             db.insert(TABLE_INTNEWS,null,cv);
         }
 
+    }
+
+    public void addPicsNews(byte[] image) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        ContentValues cv = new ContentValues();
+        cv.put(KEY_IMAGE,image);
+        db.insert(TABLE_INTNEWS,null,cv);
     }
 
     public ArrayList<ArrayList<String>> getIntNews(){
