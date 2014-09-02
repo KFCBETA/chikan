@@ -17,9 +17,9 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 
-public class EconomicViewPager extends FragmentActivity {
+public class NewsViewPager extends FragmentActivity {
 
-    Economic_viewPaperAdapter economic_viewAdapter;
+    News_viewPaperAdapter news_viewAdapter;
     ViewPager viewPager;
     private int file_count;
     private ArrayList<String> arrayList;
@@ -27,20 +27,20 @@ public class EconomicViewPager extends FragmentActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_economic_view_pager);
+        setContentView(R.layout.activity_news_view_pager);
 
         Bundle bundle = this.getIntent().getExtras();
         int position = bundle.getInt("position");
         file_count = bundle.getInt("file_count");
 
-        economic_viewAdapter = new Economic_viewPaperAdapter(getSupportFragmentManager());
+        news_viewAdapter = new News_viewPaperAdapter(getSupportFragmentManager());
 
-        viewPager = (ViewPager)findViewById(R.id.economic_pager);
-        viewPager.setAdapter(economic_viewAdapter);
+        viewPager = (ViewPager)findViewById(R.id.news_pager);
+        viewPager.setAdapter(news_viewAdapter);
         viewPager.setCurrentItem(position);
 
         ActionBar actionBar = getActionBar();
-        actionBar.setTitle("Economic");
+        actionBar.setTitle("News");
         actionBar.setHomeButtonEnabled(true);
 
         arrayList = new ArrayList<String>();
@@ -50,26 +50,10 @@ public class EconomicViewPager extends FragmentActivity {
         }
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem menu)
+
+    public class News_viewPaperAdapter extends FragmentStatePagerAdapter
     {
-        switch(menu.getItemId())
-        {
-            case android.R.id.home:
-                this.finish();
-                overridePendingTransition(R.anim.left_in,R.anim.right_out);
-                break;
-//            case R.id.setting:
-//                break;
-        }
-
-        return super.onOptionsItemSelected(menu);
-    }
-
-
-    public class Economic_viewPaperAdapter extends FragmentStatePagerAdapter
-    {
-        public Economic_viewPaperAdapter(FragmentManager fm)
+        public News_viewPaperAdapter(FragmentManager fm)
         {
             super(fm);
         }
@@ -87,7 +71,7 @@ public class EconomicViewPager extends FragmentActivity {
 
         @Override
         public int getCount() {
-            return file_count;
+            return 6;
         }
 
         @Override
@@ -102,7 +86,7 @@ public class EconomicViewPager extends FragmentActivity {
         public static final String index = "index";
 
         private DataBaseHelper dataBaseHelper;
-        private ArrayList<ArrayList<String>> economicInput;
+        private ArrayList<ArrayList<String>> NewsInput;
         private String tmp;
         private String tmp_title;
         private int file_count;
@@ -113,24 +97,42 @@ public class EconomicViewPager extends FragmentActivity {
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
-            View view_viewpager = inflater.inflate(R.layout.fragment_economic_view_pager,container,false);
+            View view_viewpager = inflater.inflate(R.layout.fragment_news_view_pager,container,false);
             Bundle args = getArguments();
 
-            dataBaseHelper = new DataBaseHelper(getActivity());
-            economicInput = dataBaseHelper.getIntNews();
+            //dataBaseHelper = new DataBaseHelper(getActivity());
+            //NewsInput = dataBaseHelper.getIntNews();
 
-            file_count = economicInput.get(0).size();
+            //file_count = NewsInput.get(0).size();
 
             int chooice = args.getInt(index);
 
             //read article from the file
-            tmp_title = economicInput.get(0).get(chooice);
-            tmp = economicInput.get(1).get(chooice);
-            ((TextView)view_viewpager.findViewById(R.id.economic_title)).setText(tmp_title);
-            ((TextView)view_viewpager.findViewById(R.id.economic_article)).setText(tmp);
+            //tmp_title = NewsInput.get(0).get(chooice);
+            //tmp = NewsInput.get(1).get(chooice);
+            tmp = Integer.toString(chooice);
+            tmp_title = Integer.toString(chooice);
+            ((TextView)view_viewpager.findViewById(R.id.news_title)).setText(tmp_title);
+            ((TextView)view_viewpager.findViewById(R.id.news_article)).setText(tmp);
 
             return view_viewpager;
         }
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem menu)
+    {
+        switch(menu.getItemId())
+        {
+            case android.R.id.home:
+                this.finish();
+                overridePendingTransition(R.anim.left_in,R.anim.right_out);
+                break;
+//            case R.id.setting:
+//                break;
+        }
+
+        return super.onOptionsItemSelected(menu);
     }
 
     @Override

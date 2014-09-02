@@ -27,6 +27,8 @@ public class InternationalViewPager extends FragmentActivity {
     ViewPager viewPager;
     private int file_count;
 
+    private ArrayList<String> arrayList;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,6 +46,12 @@ public class InternationalViewPager extends FragmentActivity {
         ActionBar actionBar = getActionBar();
         actionBar.setTitle("International");
         actionBar.setHomeButtonEnabled(true);
+
+        arrayList = new ArrayList<String>();
+        for(int i=0;i<file_count;i++)
+        {
+            arrayList.add(Integer.toString(i+1));
+        }
 
 
     }
@@ -73,14 +81,9 @@ public class InternationalViewPager extends FragmentActivity {
             return file_count;
         }
 
-        private ArrayList<String> arrayList = new ArrayList<String>();
         @Override
         public CharSequence getPageTitle(int position)
         {
-            for(int i=0;i<file_count;i++)
-            {
-                arrayList.add(Integer.toString(i+1));
-            }
 
             return arrayList.get(position);
         }

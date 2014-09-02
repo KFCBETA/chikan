@@ -13,7 +13,6 @@
         <item>Entertainment</item>
     </string-array>
 
-
     <string name="drawer_open">Open navigation drawer</string>
     <string name="drawer_close">Close navigation drawer</string>
     <string name="action_setting">Setting</string>
@@ -25,5 +24,8 @@
     <string name="sport_headline">Sport</string>
     <string name="title_activity_international_view_pager">InternationalViewPager</string>
     <string name="title_activity_drawer_test">DrawerTest</string>
+    <string name="title_activity_news_view_pager">NewsViewPager</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
 
 </resources>

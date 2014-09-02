@@ -24,6 +24,7 @@ public class EntertainmentViewPager extends FragmentActivity {
     Entertainment_viewPaperAdapter entertainment_viewAdapter;
     ViewPager viewPager;
     private int file_count;
+    private ArrayList<String> arrayList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,7 +44,11 @@ public class EntertainmentViewPager extends FragmentActivity {
         actionBar.setTitle("entertainment");
         actionBar.setHomeButtonEnabled(true);
 
-
+        arrayList = new ArrayList<String>();
+        for(int i=0;i<file_count;i++)
+        {
+            arrayList.add(Integer.toString(i+1));
+        }
     }
 
     @Override
@@ -86,15 +91,9 @@ public class EntertainmentViewPager extends FragmentActivity {
             return file_count;
         }
 
-        private ArrayList<String> arrayList = new ArrayList<String>();
         @Override
         public CharSequence getPageTitle(int position)
         {
-            for(int i=0;i<file_count;i++)
-            {
-                arrayList.add(Integer.toString(i+1));
-            }
-
             return arrayList.get(position);
         }
     }

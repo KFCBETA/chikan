@@ -72,7 +72,7 @@
                         android:layout_height="50dp"
                         android:background= "#FF30D0FF"
                         android:textSize="20sp"
-                        android:text="New-1"
+                        android:text="New-2"
                         android:id="@+id/new_2_text"/>
                     </LinearLayout>
 

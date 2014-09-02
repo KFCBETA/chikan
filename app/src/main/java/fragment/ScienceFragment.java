@@ -5,7 +5,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,19 +12,13 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.RelativeLayout;
-import android.widget.SimpleAdapter;
 import android.widget.TextView;
 
 import com.KFCBETA.hjeaimreus.chikan.DataBaseHelper;
 import com.KFCBETA.hjeaimreus.chikan.R;
 import com.KFCBETA.hjeaimreus.chikan.ScienceViewPager;
 
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
 
 
 public class ScienceFragment extends Fragment {
@@ -70,7 +63,6 @@ public class ScienceFragment extends Fragment {
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 
                 Intent intent = new Intent();
-
                 Bundle bundle = new Bundle();
                 bundle.putInt("position",i);
                 bundle.putInt("file_count",file_count);
